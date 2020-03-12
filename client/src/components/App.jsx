@@ -2,7 +2,11 @@ import React from "react";
 import "../stylesheets/app.scss";
 
 const App = () => (
-  <h1 className="main">First Commit!</h1>
+  <div className="header-container">
+    <header className="header">
+      Navigation Bar
+    </header>
+  </div>
 );
 
 export default App;
