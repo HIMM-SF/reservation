@@ -1,10 +1,8 @@
-import React from 'react';
-import '../styles/app.scss';
+import React from "react";
+import "../styles/app.scss";
 
-const App = () => {
-  return (
-    <h1 className='main'>First Commit!</h1>
-  )
-};
+const App = () => (
+  <h1 className="main">First Commit!</h1>
+);
 
-export default App; 
+export default App;
