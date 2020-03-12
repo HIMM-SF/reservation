@@ -5,8 +5,8 @@
   "main": ".eslintrc.js",
   "scripts": {
     "server": "nodemon app.js",
-    "seedDB": "node seed.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "seedDB": "node -e require('./seedDB')()",
+    "test": ""
   },
   "keywords": [],
   "author": "",
