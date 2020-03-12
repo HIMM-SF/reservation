@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/app.scss";
+import "../stylesheets/app.scss";
 
 const App = () => (
   <h1 className="main">First Commit!</h1>
