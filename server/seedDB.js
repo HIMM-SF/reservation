@@ -16,8 +16,39 @@ module.exports = () => {
       });
     };
 
+    let months = [
+      'January', 
+      'February', 
+      'March', 
+      'April', 
+      'May', 
+      'June', 
+      'July', 
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+
+    let booked_dates = {}
+    for(let i = 0; i < 12; i++) {
+      booked_dates[months[i]] = [];
+
+      for(let j = 1; j < faker.random.number({max: 15}); j++) {
+
+        let day = faker.random.number({min: 1, max: 31})
+        if(!booked_dates[months[i]].includes(day)) {
+          booked_dates[months[i]].push(day);
+        }
+      };
+
+      booked_dates[months[i]].sort((a, b) => a - b);
+    };
+
     rooms.push({
       per_night: faker.finance.amount(),
+      booked_dates,
       reviews
     })
   }
