@@ -1,35 +1,77 @@
 import React from "react";
-import "../stylesheets/app.scss";
+import styled from "styled-components";
+import Reservation from "./Reservation";
+
+const Header = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 81px;
+  color: #484848;
+  border-bottom: 1px solid #e4e4e4;
+`;
+
+const Main = styled.div`
+  height: 5000px;
+`;
+
+const ImageBody = styled.div`
+  color: #484848;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 441px;
+  border-bottom: 1px solid #e4e4e4; 
+`;
+
+const MainBodyContainer = styled.div`
+  display: flex;
+  margin: 0px 251px 0px 251px;
+  padding: 0px 24px 0px 24px;
+  height: 100%;
+`;
+
+const MainBody = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
+const MainBodyLeft = styled.div`
+  width: 594px;
+`;
+
+const MainBodyRight = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+`;
 
 const App = () => (
   <>
-    <div className="header-container">
+    <Header>
       <header className="header">
-        Navigation Bar
+        Navigation Bar 2
       </header>
-    </div>
+    </Header>
 
-    <div className="room-main">
-      <div className="room-images">
+    <Main>
+      <ImageBody>
         Images
-      </div>
+      </ImageBody>
 
-      <div className="room-main-body-container">
-        <div className="room-main-body">
-          <div className="room-main-body-left">
+      <MainBodyContainer>
+        <MainBody>
+          <MainBodyLeft>
             Left Content
-          </div>
+          </MainBodyLeft>
 
-          <div className="room-main-body-right">
-            <div className="reservation-container">
-              <div className="reservation-component">
-                Component
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          <MainBodyRight>
+            <Reservation />
+          </MainBodyRight>
+        </MainBody>
+      </MainBodyContainer>
+    </Main>
   </>
 );
 
