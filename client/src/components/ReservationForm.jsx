@@ -24,7 +24,6 @@ const DivDivider = styled.div`
 
 const FormInput = styled.div``;
 const Form = styled.form`
-  
   ${FormInput}:nth-child(1) {
     color: red;
     margin-top: 16px;
@@ -34,6 +33,26 @@ const Form = styled.form`
   ${FormInput}:nth-child(2) {
     color: blue;
     margin-bottom: 16px;
+  }
+`;
+
+const Input = styled.div`
+  border: solid 1px #EBEBEB;
+
+  div:first-child {
+    position: relative;
+    padding: 8px;
+    width: 150px;
+    height: 40px;
+
+  }
+
+  input {
+    border-style: none;
+    font-size: 17px;
+    &:focus{
+      outline: none;
+    }
   }
 `;
 
@@ -52,11 +71,28 @@ const ReservationForm = () => (
     <Form>
       <FormInput>
         <span>Dates</span>
+        <Input>
+          <div>
+            <input type="text" placeholder="Check-in" />
+          </div>
+
+          <div>
+            <input type="text" placeholder="Checkout" />
+          </div>
+        </Input>
       </FormInput>
 
       <FormInput>
         <span>Guests</span>
+        <Input>
+          <div>
+            <input type="text" placeholder="1 guest" />
+          </div>
+        </Input>
       </FormInput>
+
+      <input type="button" value="Reserve" />
+      <span>You won&apos;t be charged yet</span>
     </Form>
   </Root>
 );

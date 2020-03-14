@@ -5,7 +5,7 @@ import ReservationForm from "./ReservationForm";
 const ReservationContainer = styled.div`
   width: 376px;
   height: 387px;
-  margin-top: 24px;
+  margin-top: 32px;
   position: sticky;
   top: 75px;
 `;
