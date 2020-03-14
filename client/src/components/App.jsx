@@ -22,7 +22,6 @@ const App = () => (
 
           <div className="room-main-body-right">
             <div className="reservation-container">
-
               <div className="reservation-component">
                 Component
               </div>
