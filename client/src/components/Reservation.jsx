@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import ReservationForm from "./ReservationForm";
 
 const ReservationContainer = styled.div`
   width: 376px;
   height: 387px;
-  margin-top: 24px;
+  margin-top: 32px;
   position: sticky;
   top: 75px;
 `;
 
-const Wrapper = styled.div`
-  color: red;
+const OuterWrapper = styled.div`
   border: 1px solid #e4e4e4; 
   padding: 0px 24px 0px 24px;
   height: 100%;
@@ -18,9 +18,10 @@ const Wrapper = styled.div`
 
 const Reservation = () => (
   <ReservationContainer>
-    <Wrapper>Component</Wrapper>
+    <OuterWrapper>
+      <ReservationForm />
+    </OuterWrapper>
   </ReservationContainer>
 );
-
 
 export default Reservation;
