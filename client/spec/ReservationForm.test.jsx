@@ -31,11 +31,11 @@ describe("Unit Tests for ReservationForm", () => {
   });
 
   test("should render a input field with placeholder 'Check-in'", () => {
-    expect(wrapper.find("input").at(0).props().value).toEqual("Check-in");
+    expect(wrapper.find("input").at(0).props().placeholder).toEqual("Check-in");
   });
 
   test("should render a input field with placeholder 'Checkout'", () => {
-    expect(wrapper.find("input").at(1).props().value).toEqual("Checkout");
+    expect(wrapper.find("input").at(1).props().placeholder).toEqual("Checkout");
   });
 
   test("should render a guest input field with placeholder '1 guest'", () => {
