@@ -28,6 +28,10 @@ module.exports = {
     "linebreak-style": 0,
     "global-require": 0,
     "eslint linebreak-style": [0, "error", "windows"],
-    "max-len": "off"
+    "max-len": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prop-types": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/jsx-one-expression-per-line": 0,
   },
 };

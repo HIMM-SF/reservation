@@ -1,100 +1,53 @@
 import React from "react";
-import styled from "styled-components";
-
-const Root = styled.div`
-  margin: 16px 0 24px 0;
-  display: flex;
-  flex-direction: column;
-`;
-
-const SubHeadPrice = styled.div`
- span:first-child {
-    font-size: 22px;
-  }
-`;
-
-const SubHeadReviews = styled.div``;
-
-const DivDivider = styled.div`
-  height: 1px;
-  margin-top: 16px;
-  margin-bottom: 16px;
-  border-bottom: solid 1px #EBEBEB;
-`;
-
-const FormInput = styled.div``;
-const Form = styled.form`
-  ${FormInput}:nth-child(1) {
-    color: red;
-    margin-top: 16px;
-    margin-bottom: 8px;
-  }
-
-  ${FormInput}:nth-child(2) {
-    color: blue;
-    margin-bottom: 16px;
-  }
-`;
-
-const Input = styled.div`
-  border: solid 1px #EBEBEB;
-
-  div:first-child {
-    position: relative;
-    padding: 8px;
-    width: 150px;
-    height: 40px;
-
-  }
-
-  input {
-    border-style: none;
-    font-size: 17px;
-    &:focus{
-      outline: none;
-    }
-  }
-`;
+import Button from "./Button";
+import Paragraph from "./Paragraph";
+import Box from "./Box";
+import FormControl from "./FormControl";
+import Divider from "./Divider";
+import Input from "./Input";
+import ReservationHeader from "./ReservationHeader";
 
 const ReservationForm = () => (
-  <Root>
-    <SubHeadPrice>
-      <span>$35</span>
-      <span>per night</span>
-    </SubHeadPrice>
-    <SubHeadReviews>
-      <span>4.80</span>
-      <span>(334 reviews)</span>
-    </SubHeadReviews>
-    <DivDivider />
+  <Box column margin="16px 0 24px 0;">
+    <ReservationHeader price="37" reviews="399" />
+    <Divider />
 
-    <Form>
-      <FormInput>
-        <span>Dates</span>
-        <Input>
-          <div>
-            <input type="text" placeholder="Check-in" />
-          </div>
+    <form>
+      <FormControl label="Dates">
+        <Box alignItems="center" border>
+          <Box alignItems="center" height="40px" width="150px" padding="0 0 0 8px">
+            <Input type="text" placeholder="Check-in" />
+          </Box>
+          <Box svg>
+            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">
+              <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
+            </svg>
+          </Box>
+          <Box alignItems="center" height="40px" width="150px" padding="0 0 0 8px">
+            <Input type="text" placeholder="Checkout" />
+          </Box>
+        </Box>
+      </FormControl>
 
-          <div>
-            <input type="text" placeholder="Checkout" />
-          </div>
-        </Input>
-      </FormInput>
+      <FormControl label="Guests">
+        <Box alignItems="center" border pointer>
+          <Box alignItems="center" height="40px" padding="0 0 0 8px">
+            <Input type="text" placeholder="1 guest" width={80} />
+          </Box>
 
-      <FormInput>
-        <span>Guests</span>
-        <Input>
-          <div>
-            <input type="text" placeholder="1 guest" />
-          </div>
-        </Input>
-      </FormInput>
+          <Box svg paddingRight={16}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 0 24 24">
+              <path d="M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z" />
+            </svg>
+          </Box>
+        </Box>
+      </FormControl>
 
-      <input type="button" value="Reserve" />
-      <span>You won&apos;t be charged yet</span>
-    </Form>
-  </Root>
+      <Button block>Reserve</Button>
+      <Paragraph block center variant="h5">You won&apos;t be charged yet</Paragraph>
+    </form>
+
+  </Box>
 );
 
 export default ReservationForm;
