@@ -1,12 +1,27 @@
 import styled, { css } from "styled-components";
 
 const Box = styled.div`
-  margin: 16px 0 24px 0;
   display: flex;
   flex-direction: ${(props) => (props.column ? "column" : "row")};
+  box-sizing: border-box;
+  width: ${(props) => (props.width ? props.width : "")};
+  padding: ${(props) => (props.padding ? props.padding : "")};
+  margin: ${(props) => (props.margin ? props.margin : "")};
+  height: ${(props) => (props.height ? props.height : "")};
 
-  ${(props) => props.border && props.center && css`
-    align-items: center; 
+  ${(props) => props.pointer && css`
+    cursor: pointer; 
+  `}
+
+  ${(props) => props.alignItems && css`
+    align-items: ${props.alignItems};
+  `}
+
+  ${(props) => props.lineHeight && css`
+    line-height: ${props.lineHeight};
+  `}
+
+  ${(props) => props.border && css`
     border: solid 1px #EBEBEB;
     margin: 0;
   `}
