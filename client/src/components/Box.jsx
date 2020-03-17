@@ -22,15 +22,8 @@ const Box = styled.div`
   `}
 
   ${(props) => props.border && css`
-    border: solid 1px #EBEBEB;
+    border: solid 1px ${props.theme.borderColorV2};
     margin: 0;
-  `}
-
-  ${(props) => props.container && css`
-    background-color: white;
-    position: absolute;
-    top: 170px;
-    z-index: 99;
   `}
 
   ${(props) => props.svg && css`
@@ -47,19 +40,30 @@ const Box = styled.div`
     }
   `}
 
-  & .ito {
-    svg {
-      //20x10
-      fill: transparent;
+  & .calendar-box {
+    width: 326px; 
+    height: 330px;
+    background-color: white;
+    position: absolute;
+    top: 170px;
+    z-index: 99;
+
+    div {
       position: absolute;
       top: -10.5px;
       left: 20px;
+    }
+
+    svg {
+      width: 20px;
+      height: 10.5px;
+      fill: transparent;
       path:nth-child(1) {
         stroke: white;
       }
 
       path:nth-child(2) {
-        stroke: #EBEBEB;
+        stroke: ${(props) => props.theme.borderColorV2};
       }
     }
   }
