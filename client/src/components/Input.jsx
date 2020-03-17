@@ -10,10 +10,12 @@ const Input = styled.input`
   color: ${(props) => props.theme.lightFont};
   height: fit-content;
 
+  &.active {
+    background-color: #99ede6;
+  }
+
   &:focus {
     outline: none;
-    border-color: #99ede6;
-    background-color: #99ede6;
   }
 `;
 

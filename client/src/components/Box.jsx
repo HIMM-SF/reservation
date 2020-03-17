@@ -26,6 +26,13 @@ const Box = styled.div`
     margin: 0;
   `}
 
+  ${(props) => props.container && css`
+    background-color: white;
+    position: absolute;
+    top: 170px;
+    z-index: 99;
+  `}
+
   ${(props) => props.svg && css`
     margin: 0;
     width: 100%;
@@ -39,6 +46,23 @@ const Box = styled.div`
       fill: ${props.theme.strongFont};
     }
   `}
+
+  & .ito {
+    svg {
+      //20x10
+      fill: transparent;
+      position: absolute;
+      top: -10.5px;
+      left: 20px;
+      path:nth-child(1) {
+        stroke: white;
+      }
+
+      path:nth-child(2) {
+        stroke: #EBEBEB;
+      }
+    }
+  }
 `;
 
 export default Box;
