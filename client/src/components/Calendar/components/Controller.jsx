@@ -4,7 +4,7 @@ import ArrowRight from "../../../../assets/ArrowRight.svg";
 
 const Root = styled.div`
   width: 100%;
-  height: 84px;
+  height: fit-content;
   padding: 22px 0px 37px 0px;
   box-sizing: border-box;
   z-index: 1;

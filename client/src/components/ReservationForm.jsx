@@ -14,7 +14,7 @@ import toggleState from "../hooks/useToggle";
 const ReservationForm = () => {
   const calindarRef = useRef(null);
   const checkinRef = useRef(null);
-  const [open, setOpen] = toggleState(calindarRef, checkinRef, false);
+  const [open, setOpen] = toggleState(calindarRef, checkinRef, true);
 
   const handleCheckIn = () => {
     if (!open) {

@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Caret from "./components/Caret";
 import Controller from "./components/Controller";
+import Header from "./components/Header";
+import Month from "./components/Month";
 
 const Root = styled.div`
   display: flex;
@@ -19,7 +21,6 @@ const InnerContainer = styled.div`
   width: 300px;
   height: 285px;
   padding: 0 7px;
-  z-index: 1;
   box-sizing: border-box;
 `;
 
@@ -29,6 +30,8 @@ const Calender = (props, ref) => (
 
     <InnerContainer>
       <Controller />
+      <Header />
+      <Month />
     </InnerContainer>
   </Root>
 );
