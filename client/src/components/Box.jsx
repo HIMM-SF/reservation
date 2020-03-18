@@ -22,7 +22,7 @@ const Box = styled.div`
   `}
 
   ${(props) => props.border && css`
-    border: solid 1px #EBEBEB;
+    border: solid 1px ${props.theme.borderColorV2};
     margin: 0;
   `}
 
