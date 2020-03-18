@@ -39,34 +39,6 @@ const Box = styled.div`
       fill: ${props.theme.strongFont};
     }
   `}
-
-  & .calendar-box {
-    width: 326px; 
-    height: 330px;
-    background-color: white;
-    position: absolute;
-    top: 170px;
-    z-index: 99;
-
-    div {
-      position: absolute;
-      top: -10.5px;
-      left: 20px;
-    }
-
-    svg {
-      width: 20px;
-      height: 10.5px;
-      fill: transparent;
-      path:nth-child(1) {
-        stroke: white;
-      }
-
-      path:nth-child(2) {
-        stroke: ${(props) => props.theme.borderColorV2};
-      }
-    }
-  }
 `;
 
 export default Box;
