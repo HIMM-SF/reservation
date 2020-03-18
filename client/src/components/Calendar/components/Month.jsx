@@ -26,12 +26,12 @@ const Root = styled.div`
 
 const GridWrapper = styled.div`
   width: 100%;
-  margin-top: 35px;
+  margin-top: 37px;
   height: 100%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  
+  grid-gap: 1px;
 `;
 
 const Month = ({ currentMonth }) => {

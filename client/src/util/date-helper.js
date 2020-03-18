@@ -26,7 +26,9 @@ export const getDaysInAMonth = (month, year) => {
 
   return daysInAMonth.map((day) => {
     const temp = day.toDateString().split(" ");
-    return [day.getDay() + 1, Number(temp[2])];
+    const actualDayNameInInt = day.getDay() + 1;
+
+    return [actualDayNameInInt, Number(temp[2])];
   });
 };
 
