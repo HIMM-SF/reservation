@@ -34,17 +34,22 @@ const GridWrapper = styled.div`
   
 `;
 
-const Month = () => (
-  <Root>
-    <h4>May 2020</h4>
+const Month = ({ currentMonth }) => {
+  const { month, days } = currentMonth;
+  const [, cMonth, year] = month;
 
-    <GridWrapper>
-      <Day day={1} />
-      <Day day={2} />
-      <Day day={22} />
-      <Day day={25} />
-    </GridWrapper>
-  </Root>
-);
+  return (
+    <Root>
+      <h4>{`${cMonth} ${year}`}</h4>
+
+      <GridWrapper>
+        {days.map((day, i) => (i === 0
+          ? <Day key={day[1]} day={day[1]} startCol={day[0]} />
+          : <Day key={day[1]} day={day[1]} />))}
+
+      </GridWrapper>
+    </Root>
+  );
+};
 
 export default Month;

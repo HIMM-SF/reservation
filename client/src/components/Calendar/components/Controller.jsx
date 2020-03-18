@@ -7,7 +7,8 @@ const Root = styled.div`
   height: fit-content;
   padding: 22px 0px 37px 0px;
   box-sizing: border-box;
-  z-index: 1;
+  position: relative;
+  z-index: 2;
 `;
 
 const Button = styled.button`

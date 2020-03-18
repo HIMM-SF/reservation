@@ -7,11 +7,12 @@ const Root = styled.div`
   align-items: center;
   font-weight: bold;
   font-size: 12px;
-  border: 1px solid ${(props) => props.theme.borderColorV2}
+  border: 1px solid ${(props) => props.theme.borderColorV2};
+  grid-column-start: ${(props) => props.startCol};
 `;
 
-const Month = ({ day }) => (
-  <Root>
+const Month = ({ day, startCol }) => (
+  <Root startCol={startCol}>
     {day}
   </Root>
 );
