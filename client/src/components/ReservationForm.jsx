@@ -6,15 +6,15 @@ import FormControl from "./FormControl";
 import Divider from "./Divider";
 import Input from "./Input";
 import ReservationHeader from "./ReservationHeader";
-import Calendar from "./Calendar";
+import CheckInCalendar from "./Calendar";
 
 // hooks helper
 import toggleState from "../hooks/useToggle";
 
 const ReservationForm = () => {
-  const calindarRef = useRef(null);
+  const calendarRef = useRef(null);
   const checkinRef = useRef(null);
-  const [open, setOpen] = toggleState(calindarRef, checkinRef, true);
+  const [open, setOpen] = toggleState(calendarRef, checkinRef, true);
 
   const handleCheckIn = () => {
     if (!open) {
@@ -43,7 +43,7 @@ const ReservationForm = () => {
             </Box>
           </Box>
 
-          { open ? <Calendar ref={calindarRef} /> : ""}
+          { open ? <CheckInCalendar ref={calendarRef} /> : ""}
         </FormControl>
 
         <FormControl label="Guests">

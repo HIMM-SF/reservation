@@ -7,14 +7,20 @@ const Root = styled.div`
   align-items: center;
   font-weight: bold;
   font-size: 12px;
+  cursor: pointer;
+  color: ${(props) => props.theme.strongFont};
   grid-column-start: ${(props) => props.startCol};
   outline: 1px solid ${(props) => props.theme.borderColorV2};
 `;
 
-const Month = ({ day, week, startCol }) => (
-  <Root startCol={startCol} week={week}>
-    {day}
-  </Root>
-);
+const Month = ({ day, startCol }) => {
+  const handleClick = () => {
+  };
+  return (
+    <Root startCol={startCol} onClick={handleClick}>
+      {day}
+    </Root>
+  );
+};
 
 export default Month;

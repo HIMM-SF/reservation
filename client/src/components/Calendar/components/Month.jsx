@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Day from "./Day";
+import { ReservationContext } from "../../../context/reservation.context";
 
 const Root = styled.div`
   display: flex;
@@ -34,10 +35,8 @@ const GridWrapper = styled.div`
   grid-gap: 1px;
 `;
 
-const Month = ({ currentMonth }) => {
-  const { month, days } = currentMonth;
-  const [, cMonth, year] = month;
-
+const Month = () => {
+  const { reservation: { date: { days, month: [, cMonth, year] } } } = useContext(ReservationContext);
   return (
     <Root>
       <h4>{`${cMonth} ${year}`}</h4>
@@ -46,7 +45,6 @@ const Month = ({ currentMonth }) => {
         {days.map((day, i) => (i === 0
           ? <Day key={day[1]} day={day[1]} startCol={day[0]} />
           : <Day key={day[1]} day={day[1]} />))}
-
       </GridWrapper>
     </Root>
   );

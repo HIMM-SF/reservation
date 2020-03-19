@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Caret from "./components/Caret";
 import Controller from "./components/Controller";
 import Header from "./components/Header";
 import Month from "./components/Month";
-import { getCurrentMonth } from "../../util/date-helper";
 
 const Root = styled.div`
   display: flex;
@@ -25,20 +24,16 @@ const InnerContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const Calender = (props, ref) => {
-  const [currentMonth, setCurrentMonth] = useState(getCurrentMonth());
+const Calender = (props, ref) => (
+  <Root ref={ref} border>
+    <Caret />
 
-  return (
-    <Root ref={ref} border>
-      <Caret />
-
-      <InnerContainer>
-        <Controller />
-        <Header />
-        <Month currentMonth={currentMonth} />
-      </InnerContainer>
-    </Root>
-  );
-};
+    <InnerContainer>
+      <Controller />
+      <Header />
+      <Month />
+    </InnerContainer>
+  </Root>
+);
 
 export default React.forwardRef(Calender);
