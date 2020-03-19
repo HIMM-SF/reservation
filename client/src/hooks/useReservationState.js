@@ -16,17 +16,18 @@ export default (initialValue) => {
       setReservation({ ...reservation, date: getPreviousMonth(year, month) });
     },
 
-    addCheckIn: (date) => {
+    addCheckInDate: (day) => {
+      const { date: { month: [month,, year] } } = reservation;
       setReservation({
         ...reservation,
-        checkIn: date,
+        checkIn: `${month + 1}/${day}/${year}`,
       });
     },
 
-    addCheckOut: (date) => {
+    addCheckOutDate: (day) => {
       setReservation({
         ...reservation,
-        checkOut: date,
+        checkOut: day,
       });
     },
   };

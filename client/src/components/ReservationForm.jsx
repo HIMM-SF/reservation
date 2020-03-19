@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import Button from "./Button";
 import Paragraph from "./Paragraph";
 import Box from "./Box";
@@ -7,6 +7,8 @@ import Divider from "./Divider";
 import Input from "./Input";
 import ReservationHeader from "./ReservationHeader";
 import CheckInCalendar from "./Calendar";
+import { ReservationContext } from "../context/reservation.context";
+
 
 // hooks helper
 import toggleState from "../hooks/useToggle";
@@ -15,6 +17,7 @@ const ReservationForm = () => {
   const calendarRef = useRef(null);
   const checkinRef = useRef(null);
   const [open, setOpen] = toggleState(calendarRef, checkinRef, true);
+  const { reservation: { checkIn, checkOut } } = useContext(ReservationContext);
 
   const handleCheckIn = () => {
     if (!open) {
@@ -31,7 +34,7 @@ const ReservationForm = () => {
         <FormControl label="Dates">
           <Box alignItems="center" border>
             <Box ref={checkinRef} alignItems="center" height="40px" width="150px" padding="0 0 0 8px" onClick={handleCheckIn}>
-              <Input className={`${open ? "active" : ""}`} type="text" placeholder="Check-in" />
+              <Input className={`${open ? "active" : ""}`} type="text" placeholder={checkIn} />
             </Box>
             <Box svg>
               <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">
@@ -39,7 +42,7 @@ const ReservationForm = () => {
               </svg>
             </Box>
             <Box alignItems="center" height="40px" width="150px" padding="0 0 0 8px">
-              <Input type="text" placeholder="Checkout" />
+              <Input type="text" placeholder={checkOut} />
             </Box>
           </Box>
 

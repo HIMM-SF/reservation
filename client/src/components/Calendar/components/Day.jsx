@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { ReservationContext } from "../../../context/reservation.context";
 
 const Root = styled.div`
   display: flex;
@@ -14,10 +15,9 @@ const Root = styled.div`
 `;
 
 const Month = ({ day, startCol }) => {
-  const handleClick = () => {
-  };
+  const { addCheckInDate } = useContext(ReservationContext);
   return (
-    <Root startCol={startCol} onClick={handleClick}>
+    <Root startCol={startCol} onClick={() => addCheckInDate(day)}>
       {day}
     </Root>
   );

@@ -4,8 +4,8 @@ import { getCurrentMonth } from "../util/date-helper";
 
 const initialValue = {
   date: getCurrentMonth(),
-  checkIn: "",
-  checkOut: "",
+  checkIn: "Check-in",
+  checkOut: "Checkout",
 };
 
 export const ReservationContext = createContext();
