@@ -9,14 +9,13 @@ import ReservationHeader from "./ReservationHeader";
 import CheckInCalendar from "./Calendar";
 import { ReservationContext } from "../context/reservation.context";
 
-
 // hooks helper
 import toggleState from "../hooks/useToggle";
 
 const ReservationForm = () => {
   const calendarRef = useRef(null);
   const checkinRef = useRef(null);
-  const [open, setOpen] = toggleState(calendarRef, checkinRef, true);
+  const [open, setOpen] = toggleState(calendarRef, checkinRef, false);
   const { reservation: { checkIn, checkOut } } = useContext(ReservationContext);
 
   const handleCheckIn = () => {

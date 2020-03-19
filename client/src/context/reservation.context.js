@@ -6,6 +6,7 @@ const initialValue = {
   date: getCurrentMonth(),
   checkIn: "Check-in",
   checkOut: "Checkout",
+  action: "",
 };
 
 export const ReservationContext = createContext();

@@ -8,12 +8,21 @@ export default (initialValue) => {
     reservation,
     nextMonth: () => {
       const { date: { month: [month,, year] } } = reservation;
-      setReservation({ ...reservation, date: getNextMonth(year, month) });
+      setReservation({
+        ...reservation,
+        action: "next",
+        date: getNextMonth(year, month),
+      });
     },
 
     prevMonth: () => {
       const { date: { month: [month,, year] } } = reservation;
-      setReservation({ ...reservation, date: getPreviousMonth(year, month) });
+      setReservation({
+        ...reservation,
+        action: "prev",
+        date: getPreviousMonth(year, month),
+
+      });
     },
 
     addCheckInDate: (day) => {
