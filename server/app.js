@@ -18,6 +18,15 @@ app.get('/api/rooms/:id', (req, res) => {
     .catch(err => console.log(err));
 });
 
+app.get('/api/rooms', (req, res) => {
+  Room
+    .find()
+    .then((data) => {
+      res.json(data);
+    })
+    .catch(err => console.log(err));
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Listening to PORT ${PORT}`);
