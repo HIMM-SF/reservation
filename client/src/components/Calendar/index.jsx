@@ -8,16 +8,22 @@ import Month from "./components/Month";
 import { ReservationContext } from "../../context/reservation.context";
 
 const Root = styled.div`
-  display: flex;
   width: 326px; 
   height: 330px;
   background-color: white;
   position: absolute;
-  justify-content: center;
   top: 170px;
+  border: solid 1px ${(props) => props.theme.borderColorV2};
+`;
+
+const InnerRoot = styled.div`
+  display: flex;
+  width: inherit; 
+  height: inherit;
+  position: absolute;
+  justify-content: center;
   z-index: 1;
   overflow: hidden;
-  border: solid 1px ${(props) => props.theme.borderColorV2};
 `;
 
 const InnerContainer = styled.div`
@@ -80,17 +86,20 @@ const Calendar = (props, ref) => {
   return (
     <Root ref={ref} border>
       <Caret />
+      <InnerRoot>
 
-      <InnerContainer>
-        <Controller />
-        <Header />
 
-        <TransitionGroup childFactory={childFactoryCreator(action === "prev" ? "slide-next" : "slide-prev")}>
-          <CSSTransition key={month[0]} timeout={200} classNames={action === "prev" ? "slide-next" : "slide-prev"}>
-            <Month />
-          </CSSTransition>
-        </TransitionGroup>
-      </InnerContainer>
+        <InnerContainer>
+          <Controller />
+          <Header />
+
+          <TransitionGroup childFactory={childFactoryCreator(action === "prev" ? "slide-next" : "slide-prev")}>
+            <CSSTransition key={month[0]} timeout={200} classNames={action === "prev" ? "slide-next" : "slide-prev"}>
+              <Month />
+            </CSSTransition>
+          </TransitionGroup>
+        </InnerContainer>
+      </InnerRoot>
     </Root>
   );
 };
