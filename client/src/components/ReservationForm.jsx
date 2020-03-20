@@ -56,7 +56,7 @@ const ReservationForm = () => {
               </svg>
             </Box>
             <Box alignItems="center" height="40px" width="150px" padding="0 0 0 8px">
-              <Input className={`${checkIn ? "active" : ""}`} type="text" placeholder={checkOut || "Check-out"} />
+              <Input className={`${(openCheckIn && checkIn) ? "active" : ""}`} type="text" placeholder={checkOut || "Check-out"} />
             </Box>
           </Box>
 
