@@ -67,7 +67,7 @@ const InnerContainer = styled.div`
 `;
 
 const Calendar = (props, ref) => {
-  const { reservation: { date, action } } = useContext(ReservationContext);
+  const { reservation: { date: { month }, action } } = useContext(ReservationContext);
 
   const childFactoryCreator = (classNames) => (
     (child) => (
@@ -86,8 +86,8 @@ const Calendar = (props, ref) => {
         <Header />
 
         <TransitionGroup childFactory={childFactoryCreator(action === "prev" ? "slide-next" : "slide-prev")}>
-          <CSSTransition key={date.month[0]} timeout={200} classNames={action === "prev" ? "slide-next" : "slide-prev"}>
-            <Month date={date} />
+          <CSSTransition key={month[0]} timeout={200} classNames={action === "prev" ? "slide-next" : "slide-prev"}>
+            <Month />
           </CSSTransition>
         </TransitionGroup>
       </InnerContainer>

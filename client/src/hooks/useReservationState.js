@@ -6,6 +6,13 @@ export default (initialValue) => {
 
   return {
     reservation,
+    setRoom: (room) => {
+      setReservation({
+        ...reservation,
+        room,
+      });
+    },
+
     nextMonth: () => {
       const { date: { month: [month,, year] } } = reservation;
       setReservation({

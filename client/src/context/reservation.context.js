@@ -3,6 +3,7 @@ import useReservationState from "../hooks/useReservationState";
 import { getCurrentMonth } from "../util/date-helper";
 
 const initialValue = {
+  room: undefined,
   date: getCurrentMonth(),
   checkIn: "Check-in",
   checkOut: "Checkout",

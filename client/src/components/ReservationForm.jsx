@@ -1,4 +1,5 @@
-import React, { useRef, useContext } from "react";
+import React, { useEffect, useRef, useContext } from "react";
+import axios from "axios";
 import Button from "./Button";
 import Paragraph from "./Paragraph";
 import Box from "./Box";
@@ -16,7 +17,7 @@ const ReservationForm = () => {
   const calendarRef = useRef(null);
   const checkinRef = useRef(null);
   const [open, setOpen] = toggleState(calendarRef, checkinRef, false);
-  const { reservation: { checkIn, checkOut } } = useContext(ReservationContext);
+  const { reservation: { checkIn, checkOut, room }, setRoom } = useContext(ReservationContext);
 
   const handleCheckIn = () => {
     if (!open) {
@@ -24,9 +25,23 @@ const ReservationForm = () => {
     }
   };
 
+  const fetchAllRooms = () => {
+    axios
+      .get("http://localhost:3000/api/rooms")
+      .then(({ data: rooms }) => {
+        const rand = Math.floor(Math.random() * 100);
+        setRoom(rooms[rand]);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    fetchAllRooms();
+  }, []);
+
   return (
     <Box column margin="16px 0 24px 0;">
-      <ReservationHeader price="37" reviews="399" />
+      <ReservationHeader price={room ? Math.floor(room.per_night) : ""} reviews={room ? room.reviews.length * 25 : ""} />
       <Divider />
 
       <form>

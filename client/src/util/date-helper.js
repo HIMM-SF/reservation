@@ -52,6 +52,7 @@ export const getPreviousMonth = (year, month) => {
 
 export const getCurrentMonth = () => {
   const currentDate = new Date();
+
   return {
     month: [currentDate.getMonth(), months[currentDate.getMonth()], currentDate.getFullYear()],
     days: getDaysInAMonth(currentDate.getMonth(), currentDate.getFullYear()),

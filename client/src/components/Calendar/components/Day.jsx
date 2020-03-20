@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { ReservationContext } from "../../../context/reservation.context";
 
 const Root = styled.div`
@@ -12,15 +12,23 @@ const Root = styled.div`
   color: ${(props) => props.theme.strongFont};
   grid-column-start: ${(props) => props.startCol};
   outline: 1px solid ${(props) => props.theme.borderColorV2};
+
+  ${((props) => props.booked && css`
+    text-decoration: line-through;
+    color: ${props.theme.fontBooked};
+  `)}
 `;
 
-const Month = ({ day, startCol }) => {
+const Day = ({
+  day, startCol, booked, isWholeMonth,
+}) => {
   const { addCheckInDate } = useContext(ReservationContext);
+
   return (
-    <Root startCol={startCol} onClick={() => addCheckInDate(day)}>
+    <Root startCol={startCol} booked={booked} isWholeMonth={isWholeMonth} onClick={() => addCheckInDate(day)}>
       {day}
     </Root>
   );
 };
 
-export default Month;
+export default Day;
