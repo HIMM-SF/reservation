@@ -7,7 +7,7 @@ import FormControl from "./FormControl";
 import Divider from "./Divider";
 import Input from "./Input";
 import ReservationHeader from "./ReservationHeader";
-import CheckInCalendar from "./Calendar";
+import Calendar from "./Calendar";
 import { ReservationContext } from "../context/reservation.context";
 
 // hooks helper
@@ -15,13 +15,13 @@ import toggleState from "../hooks/useToggle";
 
 const ReservationForm = () => {
   const calendarRef = useRef(null);
-  const checkinRef = useRef(null);
-  const [open, setOpen] = toggleState(calendarRef, checkinRef, false);
+  const checkinInputRef = useRef(null);
+  const [openCheckIn, setOpenCheckIn] = toggleState(calendarRef, checkinInputRef, false);
   const { reservation: { checkIn, checkOut, room }, setRoom } = useContext(ReservationContext);
 
   const handleCheckIn = () => {
-    if (!open) {
-      setOpen(true);
+    if (!openCheckIn) {
+      setOpenCheckIn(true);
     }
   };
 
@@ -47,8 +47,8 @@ const ReservationForm = () => {
       <form>
         <FormControl label="Dates">
           <Box alignItems="center" border>
-            <Box ref={checkinRef} alignItems="center" height="40px" width="150px" padding="0 0 0 8px" onClick={handleCheckIn}>
-              <Input className={`${open ? "active" : ""}`} type="text" placeholder={checkIn} />
+            <Box alignItems="center" height="40px" width="150px" padding="0 0 0 8px" onClick={handleCheckIn}>
+              <Input ref={checkinInputRef} className={`${(openCheckIn && !checkIn) ? "active" : ""}`} type="text" placeholder={checkIn || "Check-in"} />
             </Box>
             <Box svg>
               <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">
@@ -56,11 +56,11 @@ const ReservationForm = () => {
               </svg>
             </Box>
             <Box alignItems="center" height="40px" width="150px" padding="0 0 0 8px">
-              <Input type="text" placeholder={checkOut} />
+              <Input className={`${checkIn ? "active" : ""}`} type="text" placeholder={checkOut || "Check-out"} />
             </Box>
           </Box>
 
-          { open ? <CheckInCalendar ref={calendarRef} /> : ""}
+          { openCheckIn ? <Calendar ref={calendarRef} /> : ""}
         </FormControl>
 
         <FormControl label="Guests">

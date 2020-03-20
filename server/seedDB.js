@@ -32,10 +32,17 @@ module.exports = () => {
     ];
 
     let booked_dates = {}
+
+    const currentMonth = new Date();
+
     for(let i = 0; i < 12; i++) {
       booked_dates[months[i]] = [];
+      
+      if(currentMonth.getMonth() > i) {
+        continue;
+      }
 
-      for(let j = 1; j < faker.random.number({max: 15}); j++) {
+      for(let j = 1; j < faker.random.number({max: 25}); j++) {
 
         let day = faker.random.number({min: 1, max: 31})
         if(!booked_dates[months[i]].includes(day)) {
