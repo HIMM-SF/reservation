@@ -26,7 +26,9 @@ export const getDaysInAMonth = (month, year) => {
 
   return daysInAMonth.map((day) => {
     const temp = day.toDateString().split(" ");
-    return [day.getDay() + 1, Number(temp[2])];
+    const actualDayNameInInt = day.getDay() + 1;
+
+    return [actualDayNameInInt, Number(temp[2])];
   });
 };
 
@@ -50,6 +52,7 @@ export const getPreviousMonth = (year, month) => {
 
 export const getCurrentMonth = () => {
   const currentDate = new Date();
+
   return {
     month: [currentDate.getMonth(), months[currentDate.getMonth()], currentDate.getFullYear()],
     days: getDaysInAMonth(currentDate.getMonth(), currentDate.getFullYear()),

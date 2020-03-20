@@ -11,7 +11,7 @@ const Input = styled.input`
   height: fit-content;
 
   &.active {
-    background-color: #99ede6;
+    background-color:${(props) => props.theme.inputBackground};
   }
 
   &:focus {

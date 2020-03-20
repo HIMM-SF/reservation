@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { ReservationContext } from "../../../context/reservation.context";
 
 const Root = styled.div`
   display: flex;
   position: absolute;
   top: -10.5px;
-  left: 20px;
+  left: ${(props) => (props.checkIn ? "200px;" : "20px")};
 
   svg {
     width: 20px;
@@ -22,13 +23,17 @@ const Root = styled.div`
   }
 `;
 
-const Caret = () => (
-  <Root>
-    <svg role="presentation" focusable="false">
-      <path d="M0,10 20,10 10,0z" />
-      <path d="M0,10 10,0 20,10" />
-    </svg>
-  </Root>
-);
+const Caret = () => {
+  const { reservation: { checkIn } } = useContext(ReservationContext);
+
+  return (
+    <Root checkIn={checkIn}>
+      <svg role="presentation" focusable="false">
+        <path d="M0,10 20,10 10,0z" />
+        <path d="M0,10 10,0 20,10" />
+      </svg>
+    </Root>
+  );
+};
 
 export default Caret;

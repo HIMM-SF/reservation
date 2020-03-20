@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import ArrowRight from "../../../../assets/ArrowRight.svg";
+import { ReservationContext } from "../../../context/reservation.context";
 
 const Root = styled.div`
   width: 100%;
@@ -35,13 +36,16 @@ const InnerContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const Controller = () => (
-  <Root>
-    <InnerContainer>
-      <Button left type="button"><ArrowRight /></Button>
-      <Button type="button"><ArrowRight /></Button>
-    </InnerContainer>
-  </Root>
-);
+const Controller = () => {
+  const { nextMonth, prevMonth } = useContext(ReservationContext);
 
+  return (
+    <Root>
+      <InnerContainer>
+        <Button left type="button" onClick={prevMonth}><ArrowRight /></Button>
+        <Button type="button" onClick={nextMonth}><ArrowRight /></Button>
+      </InnerContainer>
+    </Root>
+  );
+};
 export default Controller;

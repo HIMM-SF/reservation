@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Day from "./Day";
+import { ReservationContext } from "../../../context/reservation.context";
+import { checkInDaysBuilder, checkOutDaysBuilder } from "../../../util/calendar-daysBuilder";
 
 const Root = styled.div`
   display: flex;
@@ -26,27 +28,28 @@ const Root = styled.div`
 
 const GridWrapper = styled.div`
   width: 100%;
-  margin-top: 35px;
+  margin-top: 37px;
   height: 100%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  
+  grid-gap: 1px;
 `;
 
-const Month = ({ currentMonth }) => {
-  const { month, days } = currentMonth;
-  const [, cMonth, year] = month;
+const Month = () => {
+  const { reservation: { date, room: { booked_dates: bookDates }, checkIn } } = useContext(ReservationContext);
+  const { days, month: [, cMonth, year] } = date;
 
   return (
     <Root>
       <h4>{`${cMonth} ${year}`}</h4>
 
       <GridWrapper>
-        {days.map((day, i) => (i === 0
-          ? <Day key={day[1]} day={day[1]} startCol={day[0]} />
-          : <Day key={day[1]} day={day[1]} />))}
-
+        {
+          !checkIn
+            ? checkInDaysBuilder(days, bookDates[cMonth], Day)
+            : checkOutDaysBuilder(days, bookDates[cMonth], Day, checkIn)
+        }
       </GridWrapper>
     </Root>
   );
