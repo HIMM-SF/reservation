@@ -1,22 +1,43 @@
 import React from "react";
 
-const BookedDay = ({ day }) => React.cloneElement(day, { booked: true });
-
-export default (days, bookedDays, Component) => {
+export const checkInDaysBuilder = (days, bookedDays, Component) => {
   let i = 0; // match index value to the each day and increment when booked day is equal to day
 
   return days.map((day) => {
     const keyDay = day[1];
-
-    // Predefined a Day component
-    const Day = <Component key={keyDay} day={keyDay} startCol={day[0]} />;
-
     // Marked all day as booked for previous month + years
     if (!bookedDays.length || bookedDays[i] === keyDay) {
       i += 1;
-      return <BookedDay key={keyDay} day={Day} />;
+      return <Component className="booked" key={keyDay} day={keyDay} startCol={day[0]} />;
     }
 
-    return Day;
+    return <Component key={keyDay} day={keyDay} startCol={day[0]} />;
+  });
+};
+
+export const checkOutDaysBuilder = (days, bookedDays, Component, checkin) => {
+  const checkinDay = Number(checkin.split("/")[1]);
+  let checkOutDay;
+
+  // Retreive the checkout day
+  for (let i = 0; i < bookedDays.length; i += 1) {
+    if (bookedDays[i] > checkinDay) {
+      checkOutDay = bookedDays[i];
+      break;
+    }
+  }
+
+  return days.map((day) => {
+    const keyDay = day[1];
+
+    if (keyDay === checkinDay) {
+      return <Component className="check-in" key={keyDay} day={keyDay} startCol={day[0]} />;
+    }
+
+    if (checkOutDay >= keyDay && keyDay > checkinDay) {
+      return <Component className="options" key={keyDay} day={keyDay} startCol={day[0]} />;
+    }
+
+    return <Component className="booked" key={keyDay} day={keyDay} startCol={day[0]} />;
   });
 };

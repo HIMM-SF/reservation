@@ -17,21 +17,28 @@ const Root = styled.div`
     background-color: ${(props) => props.theme.borderColorV2};
   }
 
-  ${((props) => props.booked && css`
+  &.booked {
     text-decoration: line-through;
-    color: ${props.theme.fontBooked};
+    color: ${(props) => props.theme.fontBooked};
     cursor: default;
     pointer-events: none;
-  `)}
+  }
+
+  &.check-in {
+    background-color: ${(props) => props.theme.checkIn};
+    color: white;
+  }
+
+  &.options:hover {
+    background-color: ${(props) => props.theme.inputBackground};
+  }
 `;
 
-const Day = ({
-  day, startCol, booked, isWholeMonth,
-}) => {
+const Day = ({ day, ...props }) => {
   const { addCheckInDate } = useContext(ReservationContext);
 
   return (
-    <Root startCol={startCol} booked={booked} isWholeMonth={isWholeMonth} onClick={() => addCheckInDate(day)}>
+    <Root {...props} onClick={() => addCheckInDate(day)}>
       {day}
     </Root>
   );

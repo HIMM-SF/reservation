@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import Day from "./Day";
 import { ReservationContext } from "../../../context/reservation.context";
-import daysBuilder from "../../../util/calendar-daysBuilder";
+import { checkInDaysBuilder, checkOutDaysBuilder } from "../../../util/calendar-daysBuilder";
 
 const Root = styled.div`
   display: flex;
@@ -37,7 +37,7 @@ const GridWrapper = styled.div`
 `;
 
 const Month = () => {
-  const { reservation: { date, room: { booked_dates: bookDates } } } = useContext(ReservationContext);
+  const { reservation: { date, room: { booked_dates: bookDates }, checkIn } } = useContext(ReservationContext);
   const { days, month: [, cMonth, year] } = date;
 
   return (
@@ -45,7 +45,11 @@ const Month = () => {
       <h4>{`${cMonth} ${year}`}</h4>
 
       <GridWrapper>
-        {daysBuilder(days, bookDates[cMonth], Day)}
+        {
+          !checkIn
+            ? checkInDaysBuilder(days, bookDates[cMonth], Day)
+            : checkOutDaysBuilder(days, bookDates[cMonth], Day, checkIn)
+        }
       </GridWrapper>
     </Root>
   );
