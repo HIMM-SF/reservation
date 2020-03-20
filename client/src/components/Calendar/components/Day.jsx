@@ -13,9 +13,15 @@ const Root = styled.div`
   grid-column-start: ${(props) => props.startCol};
   outline: 1px solid ${(props) => props.theme.borderColorV2};
 
+  &:hover {
+    background-color: ${(props) => props.theme.borderColorV2};
+  }
+
   ${((props) => props.booked && css`
     text-decoration: line-through;
     color: ${props.theme.fontBooked};
+    cursor: default;
+    pointer-events: none;
   `)}
 `;
 
