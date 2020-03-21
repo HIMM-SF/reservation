@@ -32,18 +32,19 @@ export default (initialValue) => {
       });
     },
 
-    addCheckInDate: (day) => {
+    addReservation: (type, day) => {
       const { date: { month: [month,, year] } } = reservation;
       setReservation({
         ...reservation,
-        checkIn: `${month + 1}/${day}/${year}`,
+        [type]: `${month + 1}/${day}/${year}`,
       });
     },
 
-    addCheckOutDate: (day) => {
+    resetReservation: () => {
       setReservation({
         ...reservation,
-        checkOut: day,
+        checkIn: undefined,
+        checkOut: undefined,
       });
     },
   };

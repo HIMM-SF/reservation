@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { ReservationContext } from "../../../context/reservation.context";
 
 const Root = styled.div`
@@ -27,6 +27,7 @@ const Root = styled.div`
   &.check-in {
     background-color: ${(props) => props.theme.checkIn};
     color: white;
+    pointer-events: none;
   }
 
   &.options:hover {
@@ -35,10 +36,15 @@ const Root = styled.div`
 `;
 
 const Day = ({ day, ...props }) => {
-  const { addCheckInDate } = useContext(ReservationContext);
+  const { addReservation, reservation: { checkIn } } = useContext(ReservationContext);
+
+  const handleReservation = (e) => {
+    const type = checkIn ? "checkOut" : "checkIn";
+    addReservation(type, e.target.innerHTML);
+  };
 
   return (
-    <Root {...props} onClick={() => addCheckInDate(day)}>
+    <Root {...props} onClick={handleReservation}>
       {day}
     </Root>
   );

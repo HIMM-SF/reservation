@@ -6,10 +6,11 @@ import Controller from "./components/Controller";
 import Header from "./components/Header";
 import Month from "./components/Month";
 import { ReservationContext } from "../../context/reservation.context";
+import Clear from "./components/Clear";
 
 const Root = styled.div`
   width: 326px; 
-  height: 330px;
+  height: 340px;
   background-color: white;
   position: absolute;
   top: 170px;
@@ -73,7 +74,7 @@ const InnerContainer = styled.div`
 `;
 
 const Calendar = (props, ref) => {
-  const { reservation: { date: { month }, action } } = useContext(ReservationContext);
+  const { reservation: { date: { month }, checkIn, action } } = useContext(ReservationContext);
 
   const childFactoryCreator = (classNames) => (
     (child) => (
@@ -87,8 +88,6 @@ const Calendar = (props, ref) => {
     <Root ref={ref} border>
       <Caret />
       <InnerRoot>
-
-
         <InnerContainer>
           <Controller />
           <Header />
@@ -100,6 +99,8 @@ const Calendar = (props, ref) => {
           </TransitionGroup>
         </InnerContainer>
       </InnerRoot>
+
+      {checkIn ? <Clear /> : ""}
     </Root>
   );
 };
