@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Day from "./Day";
 import { ReservationContext } from "../../../context/reservation.context";
 import { checkInDaysBuilder, checkOutDaysBuilder } from "../../../util/calendar-daysBuilder";
@@ -34,17 +34,27 @@ const GridWrapper = styled.div`
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, 1fr);
   grid-gap: 1px;
+
+  ${(props) => props.start && props.end && css`
+    .options:nth-child(n+${props.start}):nth-child(-n+${props.end}) {
+      background-color: ${props.theme.inputBackground};
+    }
+  `}
 `;
 
 const Month = () => {
-  const { reservation: { date, room: { booked_dates: bookDates }, checkIn } } = useContext(ReservationContext);
+  const {
+    reservation: {
+      date, room: { booked_dates: bookDates }, checkIn, start, end,
+    },
+  } = useContext(ReservationContext);
   const { days, month: [, cMonth, year] } = date;
 
   return (
     <Root>
       <h4>{`${cMonth} ${year}`}</h4>
 
-      <GridWrapper>
+      <GridWrapper start={start} end={end}>
         {
           !checkIn
             ? checkInDaysBuilder(days, bookDates[cMonth], Day)

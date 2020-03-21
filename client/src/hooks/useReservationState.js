@@ -28,7 +28,6 @@ export default (initialValue) => {
         ...reservation,
         action: "prev",
         date: getPreviousMonth(year, month),
-
       });
     },
 
@@ -37,6 +36,7 @@ export default (initialValue) => {
       setReservation({
         ...reservation,
         [type]: `${month + 1}/${day}/${year}`,
+        start: day,
       });
     },
 
@@ -45,6 +45,13 @@ export default (initialValue) => {
         ...reservation,
         checkIn: undefined,
         checkOut: undefined,
+      });
+    },
+
+    animateOptionStyle: (end) => {
+      setReservation({
+        ...reservation,
+        end,
       });
     },
   };

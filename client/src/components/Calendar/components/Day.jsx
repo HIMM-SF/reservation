@@ -36,7 +36,7 @@ const Root = styled.div`
 `;
 
 const Day = ({ day, ...props }) => {
-  const { addReservation, reservation: { checkIn } } = useContext(ReservationContext);
+  const { addReservation, animateOptionStyle, reservation: { checkIn } } = useContext(ReservationContext);
 
   const handleReservation = (e) => {
     const type = checkIn ? "checkOut" : "checkIn";
@@ -44,7 +44,7 @@ const Day = ({ day, ...props }) => {
   };
 
   return (
-    <Root {...props} onClick={handleReservation}>
+    <Root {...props} onClick={handleReservation} onMouseEnter={animateOptionStyle}>
       {day}
     </Root>
   );
