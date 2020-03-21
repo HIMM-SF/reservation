@@ -31,8 +31,11 @@ export default (initialValue) => {
       });
     },
 
-    addReservation: (type, day) => {
-      const { date: { month: [month,, year] } } = reservation;
+    addReservation: (e) => {
+      const { date: { month: [month,, year] }, checkIn } = reservation;
+      const type = checkIn ? "checkOut" : "checkIn";
+      const day = e.target.innerHTML;
+
       setReservation({
         ...reservation,
         [type]: `${month + 1}/${day}/${year}`,
@@ -48,10 +51,10 @@ export default (initialValue) => {
       });
     },
 
-    animateOptionStyle: (end) => {
+    animateOptionStyle: (e) => {
       setReservation({
         ...reservation,
-        end,
+        end: e.target.innerHTML,
       });
     },
   };

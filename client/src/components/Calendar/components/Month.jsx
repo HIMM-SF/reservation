@@ -38,6 +38,7 @@ const GridWrapper = styled.div`
   ${(props) => props.start && props.end && css`
     .options:nth-child(n+${props.start}):nth-child(-n+${props.end}) {
       background-color: ${props.theme.inputBackground};
+      color: white;
     }
   `}
 `;
