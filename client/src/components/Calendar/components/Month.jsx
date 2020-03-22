@@ -8,7 +8,6 @@ const Root = styled.div`
   flex: 1;
   position: relative;
   flex-direction: column;
-  // position: absolute;
   align-items: center;
   top: 0;
   width: 286px;

@@ -9,6 +9,7 @@ import Input from "./Input";
 import ReservationHeader from "./ReservationHeader";
 import Calendar from "./Calendar";
 import { ReservationContext } from "../context/reservation.context";
+import GuestForm from "./Guest";
 
 // hooks helper
 import toggleState from "../hooks/useToggle";
@@ -16,12 +17,21 @@ import toggleState from "../hooks/useToggle";
 const ReservationForm = () => {
   const calendarRef = useRef(null);
   const checkinInputRef = useRef(null);
+  const guestFormRef = useRef(null);
+  const guestFormInputRef = useRef(null);
   const [openCheckIn, setOpenCheckIn] = toggleState(calendarRef, checkinInputRef, false);
+  const [openGuestForm, setOpenGuestForm] = toggleState(guestFormRef, guestFormInputRef, true);
   const { reservation: { checkIn, checkOut, room }, setRoom } = useContext(ReservationContext);
 
   const handleCheckIn = () => {
     if (!openCheckIn) {
       setOpenCheckIn(true);
+    }
+  };
+
+  const handleGuestForm = () => {
+    if (!openGuestForm) {
+      setOpenGuestForm(true);
     }
   };
 
@@ -64,9 +74,9 @@ const ReservationForm = () => {
         </FormControl>
 
         <FormControl label="Guests">
-          <Box alignItems="center" border pointer>
+          <Box ref={guestFormInputRef} alignItems="center" border pointer onClick={handleGuestForm}>
             <Box alignItems="center" height="40px" padding="0 0 0 8px">
-              <Input type="text" placeholder="1 guest" width={80} />
+              <Input pointer type="text" placeholder="1 guest" width={80} />
             </Box>
 
             <Box svg paddingRight={16}>
@@ -75,6 +85,7 @@ const ReservationForm = () => {
               </svg>
             </Box>
           </Box>
+          { openGuestForm ? <GuestForm ref={guestFormRef} /> : ""}
         </FormControl>
 
         <Button block>Reserve</Button>
