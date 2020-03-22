@@ -9,7 +9,7 @@ const months = {
   6: "July",
   7: "August",
   8: "September",
-  9: "Octorber",
+  9: "October",
   10: "November",
   11: "December",
 };
@@ -36,7 +36,7 @@ export const getNextMonth = (year, month) => {
   const newMonth = new Date(year, month + 1);
 
   return {
-    month: [newMonth.getMonth(), months[newMonth.getMonth()], newMonth.getFullYear()],
+    info: [newMonth.getMonth(), months[newMonth.getMonth()], newMonth.getFullYear()],
     days: getDaysInAMonth(newMonth.getMonth(), newMonth.getFullYear()),
   };
 };
@@ -45,16 +45,31 @@ export const getPreviousMonth = (year, month) => {
   const newMonth = new Date(year, month - 1);
 
   return {
-    month: [newMonth.getMonth(), months[newMonth.getMonth()], newMonth.getFullYear()],
+    info: [newMonth.getMonth(), months[newMonth.getMonth()], newMonth.getFullYear()],
     days: getDaysInAMonth(newMonth.getMonth(), newMonth.getFullYear()),
   };
+};
+
+export const getCurrentYear = () => {
+  const currentYear = [];
+
+  for (let i = 0; i < 12; i += 1) {
+    const date = new Date(2020, i);
+
+    currentYear.push({
+      info: [date.getMonth(), months[date.getMonth()], date.getFullYear()],
+      days: getDaysInAMonth(date.getMonth(), date.getFullYear()),
+    });
+  }
+
+  return currentYear;
 };
 
 export const getCurrentMonth = () => {
   const currentDate = new Date();
 
   return {
-    month: [currentDate.getMonth(), months[currentDate.getMonth()], currentDate.getFullYear()],
+    info: [currentDate.getMonth(), months[currentDate.getMonth()], currentDate.getFullYear()],
     days: getDaysInAMonth(currentDate.getMonth(), currentDate.getFullYear()),
   };
 };

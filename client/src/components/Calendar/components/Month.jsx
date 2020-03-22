@@ -5,14 +5,18 @@ import { ReservationContext } from "../../../context/reservation.context";
 
 const Root = styled.div`
   display: flex;
+  flex: 1;
+  position: relative;
   flex-direction: column;
-  position: absolute;
+  // position: absolute;
   align-items: center;
   top: 0;
   width: 286px;
   height: 300px;
+  min-width: 286px;
   box-sizing: border-box;
   padding-top: 22px;
+  margin-right: 29px;
 
   h4 {
     width: 100%;
@@ -42,24 +46,21 @@ const GridWrapper = styled.div`
   `}
 `;
 
-const Month = () => {
+const Month = ({ month }) => {
   const {
     openDaysBuilder,
     checkOutDaysBuilder,
-    reservation: {
-      date, checkIn, start, end,
-    },
+    reservation: { checkIn, start, end },
   } = useContext(ReservationContext);
-  const { month: [, cMonth, year] } = date;
-
+  const { info: [, cMonth, year] } = month;
+  console.log(month);
   return (
     <Root>
       <h4>{`${cMonth} ${year}`}</h4>
-
       <GridWrapper start={start} end={end}>
         {
           !checkIn
-            ? openDaysBuilder(Day)
+            ? openDaysBuilder(month, Day)
             : checkOutDaysBuilder(Day)
         }
       </GridWrapper>

@@ -14,25 +14,23 @@ export default (initialValue) => {
     },
 
     nextMonth: () => {
-      const { date: { month: [month,, year] } } = reservation;
+      const { month: { info: [month,, year] } } = reservation;
       setReservation({
         ...reservation,
-        action: "next",
-        date: getNextMonth(year, month),
+        month: getNextMonth(year, month),
       });
     },
 
     prevMonth: () => {
-      const { date: { month: [month,, year] } } = reservation;
+      const { month: { info: [month,, year] } } = reservation;
       setReservation({
         ...reservation,
-        action: "prev",
-        date: getPreviousMonth(year, month),
+        month: getPreviousMonth(year, month),
       });
     },
 
     addReservation: (e) => {
-      const { date: { month: [month,, year] }, checkIn } = reservation;
+      const { month: { info: [month,, year] }, checkIn } = reservation;
       const type = checkIn ? "checkOut" : "checkIn";
       const day = e.target.innerHTML;
 
@@ -58,9 +56,9 @@ export default (initialValue) => {
       });
     },
 
-    openDaysBuilder: (Component) => {
-      const { date, room: { booked_dates: bookedDays } } = reservation;
-      const { days, month: [, cMonth] } = date;
+    openDaysBuilder: (month, Component) => {
+      const { days, info: [, cMonth] } = month;
+      const { room: { booked_dates: bookedDays } } = reservation;
       let i = 0; // match index value to the each day and increment when booked day is equal to day
 
       return days.map((day) => {
@@ -76,9 +74,9 @@ export default (initialValue) => {
     },
 
     checkOutDaysBuilder: (Component) => {
-      const { date, checkIn, room: { booked_dates: bookedDays } } = reservation;
+      const { month, checkIn, room: { booked_dates: bookedDays } } = reservation;
       const checkinDay = Number(checkIn.split("/")[1]);
-      const { days, month: [, cMonth] } = date;
+      const { days, info: [, cMonth] } = month;
       let checkOutDay;
 
       // Retreive the checkout day

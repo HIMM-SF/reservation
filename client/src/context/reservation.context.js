@@ -1,10 +1,11 @@
 import React, { createContext } from "react";
 import useReservationState from "../hooks/useReservationState";
-import { getCurrentMonth } from "../util/date-helper";
+import { getCurrentMonth, getCurrentYear } from "../util/date-helper";
 
 const initialValue = {
   room: undefined,
-  date: getCurrentMonth(),
+  month: getCurrentMonth(),
+  year: getCurrentYear(),
   checkIn: undefined,
   checkOut: undefined,
 };
