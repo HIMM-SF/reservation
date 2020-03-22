@@ -23,14 +23,14 @@ const Button = styled.button`
   cursor: pointer;
   color: ${(props) => props.theme.checkIn};
   border: 1px solid ${(props) => props.theme.checkIn};
+  background-color: white;
 `;
 
-const Controller = ({ counter }) => (
+const Controller = ({ children }) => (
   <Root>
     <Button type="button">-</Button>
-    <h5>0</h5>
+    <h5>{ children }</h5>
     <Button type="button">+</Button>
   </Root>
 );
-
 export default Controller;

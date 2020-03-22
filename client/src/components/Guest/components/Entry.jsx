@@ -24,15 +24,16 @@ const Text = styled.div`
   }
 `;
 
-const Entry = ({ title, text, fullWidth }) => (
+const Entry = ({
+  title, text, fullWidth, value,
+}) => (
   <Root>
     <Text>
       <h4>{title}</h4>
       <h5>{text}</h5>
     </Text>
 
-    {fullWidth ? "" : <Controller /> }
+    {fullWidth ? "" : <Controller>{value}</Controller> }
   </Root>
 );
-
 export default Entry;

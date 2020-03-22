@@ -8,6 +8,11 @@ const initialValue = {
   year: getCurrentYear(),
   checkIn: undefined,
   checkOut: undefined,
+  guest: {
+    adults: 1,
+    children: 0,
+    infants: 0,
+  },
 };
 
 export const ReservationContext = createContext();
