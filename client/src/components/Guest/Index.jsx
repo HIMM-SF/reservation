@@ -37,7 +37,7 @@ const Close = styled.div`
 `;
 
 const Guest = (props, ref) => {
-  const { reservation: { guest: { adults, children, infants } } } = useContext(ReservationContext);
+  const { guest: { adults, children, infants } } = useContext(ReservationContext);
 
   return (
     <Root ref={ref}>

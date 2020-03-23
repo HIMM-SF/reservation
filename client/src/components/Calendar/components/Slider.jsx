@@ -15,7 +15,7 @@ const RootWrapper = styled.div`
 `;
 
 const Slider = ({ children }) => {
-  const { reservation: { month: { info: [index] } } } = useContext(ReservationContext);
+  const { month: { info: [index] } } = useContext(ReservationContext);
 
   return (
     <Root>

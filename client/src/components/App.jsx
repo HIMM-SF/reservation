@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Reservation from "./Reservation";
-import { ReservationProvider } from "../context/reservation.context";
+import { ReservationProvider2 } from "../context/reservation.context";
 
 const Header = styled.div`
   display: flex;
@@ -68,9 +68,11 @@ const App = () => (
           </MainBodyLeft>
 
           <MainBodyRight>
-            <ReservationProvider>
+
+            <ReservationProvider2>
               <Reservation />
-            </ReservationProvider>
+            </ReservationProvider2>
+
           </MainBodyRight>
         </MainBody>
       </MainBodyContainer>

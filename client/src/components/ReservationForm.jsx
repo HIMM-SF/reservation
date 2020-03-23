@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, {
+  useEffect, useRef, useContext,
+} from "react";
 import axios from "axios";
 import Button from "./Button";
 import Paragraph from "./Paragraph";
@@ -8,9 +10,10 @@ import Divider from "./Divider";
 import Input from "./Input";
 import ReservationHeader from "./ReservationHeader";
 import Calendar from "./Calendar";
-import { ReservationContext } from "../context/reservation.context";
+import { ReservationActionContext, ReservationContext } from "../context/reservation.context";
 import GuestForm from "./Guest";
 import ArrowDown from "../../assets/ArrowDown.svg";
+import { setRoom } from "../actions";
 
 // hooks helper
 import toggleState from "../hooks/useToggle";
@@ -21,8 +24,13 @@ const ReservationForm = () => {
   const guestFormRef = useRef(null);
   const guestFormInputRef = useRef(null);
   const [openCheckIn, setOpenCheckIn] = toggleState(calendarRef, checkinInputRef, false);
-  const [openGuestForm, setOpenGuestForm] = toggleState(guestFormRef, guestFormInputRef, true);
-  const { reservation: { checkIn, checkOut, room }, setRoom } = useContext(ReservationContext);
+  const [openGuestForm, setOpenGuestForm] = toggleState(guestFormRef, guestFormInputRef, false);
+
+
+  const {
+    checkIn, checkOut, room, year,
+  } = useContext(ReservationContext);
+  const dispatch = useContext(ReservationActionContext);
 
   const handleCheckIn = () => {
     if (!openCheckIn) {
@@ -41,14 +49,14 @@ const ReservationForm = () => {
       .get("http://localhost:3000/api/rooms")
       .then(({ data: rooms }) => {
         const rand = Math.floor(Math.random() * 100);
-        setRoom(rooms[rand]);
+        setRoom(dispatch)(rooms[rand]);
       })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
     fetchAllRooms();
-  }, []);
+  }, [year]);
 
   return (
     <Box column margin="16px 0 24px 0;">

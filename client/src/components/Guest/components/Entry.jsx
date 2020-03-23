@@ -33,7 +33,9 @@ const Entry = ({
       <h5>{text}</h5>
     </Text>
 
-    {fullWidth ? "" : <Controller>{value}</Controller> }
+    {fullWidth ? "" : (
+      <Controller type={title}>{ value }</Controller>
+    ) }
   </Root>
 );
 export default Entry;

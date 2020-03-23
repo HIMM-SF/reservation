@@ -1,6 +1,6 @@
-import React, { createContext } from "react";
-import useReservationState from "../hooks/useReservationState";
+import React, { createContext, useReducer } from "react";
 import { getCurrentMonth, getCurrentYear } from "../util/date-helper";
+import reservationReducer from "../reducers/reservation.reducer";
 
 const initialValue = {
   room: undefined,
@@ -16,13 +16,15 @@ const initialValue = {
 };
 
 export const ReservationContext = createContext();
+export const ReservationActionContext = createContext();
 
-export const ReservationProvider = ({ children }) => {
-  const reservation = useReservationState(initialValue);
-
+export function ReservationProvider2({ children }) {
+  const [reservation, dispatch] = useReducer(reservationReducer, initialValue);
   return (
     <ReservationContext.Provider value={reservation}>
-      {children}
+      <ReservationActionContext.Provider value={dispatch}>
+        {children}
+      </ReservationActionContext.Provider>
     </ReservationContext.Provider>
   );
-};
+}

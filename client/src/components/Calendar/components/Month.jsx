@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import styled, { css } from "styled-components";
 import Day from "./Day";
 import { ReservationContext } from "../../../context/reservation.context";
+import { openDaysBuilder, checkOutDaysBuilder } from "../../../util/date-helper";
 
 const Root = styled.div`
   display: flex;
@@ -47,20 +48,18 @@ const GridWrapper = styled.div`
 
 const Month = ({ month }) => {
   const {
-    openDaysBuilder,
-    checkOutDaysBuilder,
-    reservation: { checkIn, start, end },
+    checkIn, start, room: { booked_dates: bookedDates }, end,
   } = useContext(ReservationContext);
   const { info: [, cMonth, year] } = month;
-  console.log(month);
+
   return (
     <Root>
       <h4>{`${cMonth} ${year}`}</h4>
       <GridWrapper start={start} end={end}>
         {
           !checkIn
-            ? openDaysBuilder(month, Day)
-            : checkOutDaysBuilder(Day)
+            ? openDaysBuilder(month, bookedDates, Day)
+            : checkOutDaysBuilder(checkIn, month, bookedDates, Day)
         }
       </GridWrapper>
     </Root>

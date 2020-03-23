@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import ArrowRight from "../../../../assets/ArrowRight.svg";
-import { ReservationContext } from "../../../context/reservation.context";
+import { ReservationActionContext } from "../../../context/reservation.context";
+import { prevMonth, nextMonth } from "../../../actions";
 
 const Root = styled.div`
   width: 100%;
@@ -37,13 +38,13 @@ const InnerContainer = styled.div`
 `;
 
 const Controller = () => {
-  const { nextMonth, prevMonth } = useContext(ReservationContext);
+  const dispatch = useContext(ReservationActionContext);
 
   return (
     <Root>
       <InnerContainer>
-        <Button left type="button" onClick={prevMonth}><ArrowRight /></Button>
-        <Button type="button" onClick={nextMonth}><ArrowRight /></Button>
+        <Button left type="button" onClick={prevMonth(dispatch)}><ArrowRight /></Button>
+        <Button type="button" onClick={nextMonth(dispatch)}><ArrowRight /></Button>
       </InnerContainer>
     </Root>
   );

@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { memo, useContext } from "react";
 import styled from "styled-components";
-import { ReservationContext } from "../../../context/reservation.context";
+import { ReservationActionContext } from "../../../context/reservation.context";
+import { addReservation, onHover } from "../../../actions";
 
 const Root = styled.div`
   display: flex;
@@ -36,13 +37,14 @@ const Root = styled.div`
 `;
 
 const Day = ({ day, ...props }) => {
-  const { addReservation, animateOptionStyle } = useContext(ReservationContext);
+  const dispatch = useContext(ReservationActionContext);
+  console.log("Inside Day Component");
 
   return (
-    <Root {...props} onClick={addReservation} onMouseEnter={animateOptionStyle}>
+    <Root {...props} onClick={addReservation(dispatch)} onMouseEnter={onHover(dispatch)}>
       {day}
     </Root>
   );
 };
 
-export default Day;
+export default memo(Day);

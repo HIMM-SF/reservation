@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, memo } from "react";
 import styled from "styled-components";
 import Caret from "./components/Caret";
 import Controller from "./components/Controller";
@@ -35,8 +35,9 @@ const InnerContainer = styled.div`
 `;
 
 const Calendar = (props, ref) => {
-  const { reservation: { checkIn, year } } = useContext(ReservationContext);
+  const { checkIn, year } = useContext(ReservationContext);
 
+  console.log("Re-render Calendar");
   return (
     <Root ref={ref} border>
       <Caret />
@@ -57,4 +58,4 @@ const Calendar = (props, ref) => {
   );
 };
 
-export default React.forwardRef(Calendar);
+export default memo(React.forwardRef(Calendar));

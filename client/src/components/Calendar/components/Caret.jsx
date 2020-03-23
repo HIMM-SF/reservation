@@ -24,7 +24,7 @@ const Root = styled.div`
 `;
 
 const Caret = () => {
-  const { reservation: { checkIn } } = useContext(ReservationContext);
+  const { checkIn } = useContext(ReservationContext);
 
   return (
     <Root checkIn={checkIn}>
