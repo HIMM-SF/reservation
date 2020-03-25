@@ -1,8 +1,12 @@
 import React, { useContext } from "react";
-import styled, { css } from "styled-components";
-import { ReservationContext } from "../../../context/reservation.context";
+import styled from "styled-components";
+import { ReservationActionContext } from "../../../context/reservation.context";
+import { addReservation, onHover } from "../../../actions";
 
-const Root = styled.div`
+const Root = styled.div.attrs((props) => ({
+  "data-date": props.date,
+  "data-type": props.type,
+}))`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,21 +31,23 @@ const Root = styled.div`
   &.check-in {
     background-color: ${(props) => props.theme.checkIn};
     color: white;
+    pointer-events: none;
   }
 
-  &.options:hover {
+  &.options {
     background-color: ${(props) => props.theme.inputBackground};
+    color: white;
   }
 `;
 
 const Day = ({ day, ...props }) => {
-  const { addCheckInDate } = useContext(ReservationContext);
+  const dispatch = useContext(ReservationActionContext);
 
   return (
-    <Root {...props} onClick={() => addCheckInDate(day)}>
+    <Root {...props} onClick={addReservation(dispatch)} onMouseEnter={onHover(dispatch)}>
       {day}
     </Root>
   );
 };
 
-export default Day;
+export default React.memo(Day);

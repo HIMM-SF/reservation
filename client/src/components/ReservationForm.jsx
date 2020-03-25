@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, {
+  useEffect, useRef, useContext,
+} from "react";
 import axios from "axios";
 import Button from "./Button";
 import Paragraph from "./Paragraph";
@@ -8,7 +10,11 @@ import Divider from "./Divider";
 import Input from "./Input";
 import ReservationHeader from "./ReservationHeader";
 import Calendar from "./Calendar";
-import { ReservationContext } from "../context/reservation.context";
+import Summary from "./Summary";
+import GuestForm from "./Guest";
+import ArrowDown from "../../assets/ArrowDown.svg";
+import { setRoom } from "../actions";
+import { ReservationActionContext, ReservationContext } from "../context/reservation.context";
 
 // hooks helper
 import toggleState from "../hooks/useToggle";
@@ -16,12 +22,25 @@ import toggleState from "../hooks/useToggle";
 const ReservationForm = () => {
   const calendarRef = useRef(null);
   const checkinInputRef = useRef(null);
+  const guestFormRef = useRef(null);
+  const guestFormInputRef = useRef(null);
   const [openCheckIn, setOpenCheckIn] = toggleState(calendarRef, checkinInputRef, false);
-  const { reservation: { checkIn, checkOut, room }, setRoom } = useContext(ReservationContext);
+  const [openGuestForm, setOpenGuestForm] = toggleState(guestFormRef, guestFormInputRef, false);
+
+  const {
+    room, months, checkOut, checkIn, guest: { adults, children, infants },
+  } = useContext(ReservationContext);
+  const dispatch = useContext(ReservationActionContext);
 
   const handleCheckIn = () => {
     if (!openCheckIn) {
       setOpenCheckIn(true);
+    }
+  };
+
+  const handleGuestForm = () => {
+    if (!openGuestForm) {
+      setOpenGuestForm(true);
     }
   };
 
@@ -30,7 +49,7 @@ const ReservationForm = () => {
       .get("http://localhost:3000/api/rooms")
       .then(({ data: rooms }) => {
         const rand = Math.floor(Math.random() * 100);
-        setRoom(rooms[rand]);
+        setRoom(dispatch)(rooms[rand]);
       })
       .catch((err) => console.log(err));
   };
@@ -56,26 +75,32 @@ const ReservationForm = () => {
               </svg>
             </Box>
             <Box alignItems="center" height="40px" width="150px" padding="0 0 0 8px">
-              <Input className={`${(openCheckIn && checkIn) ? "active" : ""}`} type="text" placeholder={checkOut || "Check-out"} />
+              <Input className={`${(openCheckIn && checkIn && !checkOut) ? "active" : ""}`} type="text" placeholder={checkOut || "Check-out"} />
             </Box>
           </Box>
 
-          { openCheckIn ? <Calendar ref={calendarRef} /> : ""}
+          { (openCheckIn && !checkOut) ? <Calendar months={months} bookedDates={room.booked_dates} checkIn={checkIn} ref={calendarRef} /> : ""}
         </FormControl>
 
         <FormControl label="Guests">
-          <Box alignItems="center" border pointer>
+          <Box ref={guestFormInputRef} alignItems="center" border pointer onClick={handleGuestForm}>
             <Box alignItems="center" height="40px" padding="0 0 0 8px">
-              <Input type="text" placeholder="1 guest" width={80} />
+              <Input
+                pointer
+                type="text"
+                placeholder={`${adults} guests${children ? `,${children} children` : ""}${infants ? `,${infants} infants` : ""}`}
+                width={220}
+              />
             </Box>
 
             <Box svg paddingRight={16}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18px" viewBox="0 0 24 24">
-                <path d="M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z" />
-              </svg>
+              <ArrowDown width={16} height={16} style={{ transform: openGuestForm ? "rotate(180deg)" : "" }} />
             </Box>
           </Box>
+          { openGuestForm ? <GuestForm ref={guestFormRef} closeForm={setOpenGuestForm} /> : ""}
         </FormControl>
+
+        {(checkIn && checkOut) ? <Summary /> : ""}
 
         <Button block>Reserve</Button>
         <Paragraph block center variant="h5">You won&apos;t be charged yet</Paragraph>
@@ -85,4 +110,4 @@ const ReservationForm = () => {
   );
 };
 
-export default ReservationForm;
+export default React.memo(ReservationForm);

@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import React from "react";
+import styled, { css } from "styled-components";
 
 const Input = styled.input`
   border-style: none;
@@ -17,6 +18,10 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
+
+  ${(props) => props.pointer && css`
+    cursor: pointer;
+  `}
 `;
 
-export default Input;
+export default React.memo(Input);

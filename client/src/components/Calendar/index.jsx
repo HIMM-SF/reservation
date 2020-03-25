@@ -1,15 +1,15 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 import Caret from "./components/Caret";
 import Controller from "./components/Controller";
 import Header from "./components/Header";
 import Month from "./components/Month";
-import { ReservationContext } from "../../context/reservation.context";
+import Clear from "./components/Clear";
+import Slider from "./components/Slider";
 
 const Root = styled.div`
   width: 326px; 
-  height: 330px;
+  height: 340px;
   background-color: white;
   position: absolute;
   top: 170px;
@@ -32,74 +32,40 @@ const InnerContainer = styled.div`
   padding: 0 7px;
   box-sizing: border-box;
 
-  /* slide enter */
-  .slide-prev-enter {
-    transform: translate(320px);
-
-    &.slide-prev-enter-active {
-      transform: translate(0);
-      transition: transform 200ms linear;
-    }
-  }
-
-  /* slide exit */
-  .slide-prev-exit {
-    transform: translate(0px);
-
-    &.slide-prev-exit-active {
-      transform: translate(-320px);
-      transition: transform 200ms linear;
-    }
-  } 
-
-  .slide-next-enter {
-    transform: translate(-320px);
-
-    &.slide-next-enter.slide-next-enter-active {
-      transform: translate(0px);
-      transition: transform 200ms linear;
-    }
-  }
-
-  /* slide exit */
-  .slide-next-exit {
-    transform: translate(0px);
-
-    &.slide-next-exit.slide-next-exit-active {
-      transform: translate(320px);
-      transition: transform 200ms linear;
-    }     
+  .slider {
+    transform: translateX(-${(props) => (((props.index) * 315))}px);
   }
 `;
 
-const Calendar = (props, ref) => {
-  const { reservation: { date: { month }, action } } = useContext(ReservationContext);
+const Calendar = ({ checkIn, months, bookedDates }, ref) => {
+  const [currentIndex, setcurrentIndex] = useState((new Date()).getMonth());
 
-  const childFactoryCreator = (classNames) => (
-    (child) => (
-      React.cloneElement(child, {
-        classNames,
-      })
-    )
-  );
+  const handleSlider = (direction) => {
+    let oldIndex = currentIndex;
+    const newIndex = direction === "left" ? oldIndex -= 1 : oldIndex += 1;
+
+    setcurrentIndex(newIndex);
+  };
 
   return (
     <Root ref={ref} border>
       <Caret />
       <InnerRoot>
-
-
         <InnerContainer>
-          <Controller />
+          <Controller handleSlider={handleSlider} />
           <Header />
 
-          <TransitionGroup childFactory={childFactoryCreator(action === "prev" ? "slide-next" : "slide-prev")}>
-            <CSSTransition key={month[0]} timeout={200} classNames={action === "prev" ? "slide-next" : "slide-prev"}>
-              <Month />
-            </CSSTransition>
-          </TransitionGroup>
+          <Slider index={currentIndex}>
+            { months.map((month) => {
+              const [id, name] = month.info;
+              return <Month key={id} bookedDays={bookedDates[name]} month={month} />;
+            })}
+          </Slider>
+
         </InnerContainer>
       </InnerRoot>
+
+      {checkIn ? <Clear /> : ""}
     </Root>
   );
 };

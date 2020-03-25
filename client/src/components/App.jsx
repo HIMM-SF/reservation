@@ -68,9 +68,11 @@ const App = () => (
           </MainBodyLeft>
 
           <MainBodyRight>
+
             <ReservationProvider>
               <Reservation />
             </ReservationProvider>
+
           </MainBodyRight>
         </MainBody>
       </MainBodyContainer>

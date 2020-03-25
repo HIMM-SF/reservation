@@ -60,4 +60,4 @@ const ReservationHeader = ({ price, reviews }) => (
   </>
 );
 
-export default ReservationHeader;
+export default React.memo(ReservationHeader);

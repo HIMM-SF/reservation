@@ -13,7 +13,7 @@ const ReservationContainer = styled.div`
 const OuterWrapper = styled.div`
   border: 1px solid ${(props) => props.theme.borderColorV2}; 
   padding: 0px 24px 0px 24px;
-  height: 350px;
+  height: auto;
 `;
 
 const Reservation = () => (
@@ -24,4 +24,4 @@ const Reservation = () => (
   </ReservationContainer>
 );
 
-export default Reservation;
+export default React.memo(Reservation);
