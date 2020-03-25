@@ -19,7 +19,13 @@ import { ReservationActionContext, ReservationContext } from "../context/reserva
 // hooks helper
 import toggleState from "../hooks/useToggle";
 
+
 const ReservationForm = () => {
+  const {
+    room, months, checkOut, checkIn, guest: { adults, children, infants },
+  } = useContext(ReservationContext);
+  const dispatch = useContext(ReservationActionContext);
+
   const calendarRef = useRef(null);
   const checkinInputRef = useRef(null);
   const guestFormRef = useRef(null);
@@ -27,12 +33,11 @@ const ReservationForm = () => {
   const [openCheckIn, setOpenCheckIn] = toggleState(calendarRef, checkinInputRef, false);
   const [openGuestForm, setOpenGuestForm] = toggleState(guestFormRef, guestFormInputRef, false);
 
-  const {
-    room, months, checkOut, checkIn, guest: { adults, children, infants },
-  } = useContext(ReservationContext);
-  const dispatch = useContext(ReservationActionContext);
-
   const handleCheckIn = () => {
+    if (checkOut) {
+      setOpenCheckIn(true);
+    }
+
     if (!openCheckIn) {
       setOpenCheckIn(true);
     }
@@ -79,7 +84,7 @@ const ReservationForm = () => {
             </Box>
           </Box>
 
-          { (openCheckIn && !checkOut) ? <Calendar months={months} bookedDates={room.booked_dates} checkIn={checkIn} ref={calendarRef} /> : ""}
+          { openCheckIn ? <Calendar close={setOpenCheckIn} months={months} bookedDates={room.booked_dates} checkIn={checkIn} ref={calendarRef} /> : ""}
         </FormControl>
 
         <FormControl label="Guests">

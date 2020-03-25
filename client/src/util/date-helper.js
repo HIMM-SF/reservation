@@ -98,7 +98,7 @@ export const openDaysBuilder = (month, bookedDays, Component) => {
   });
 };
 
-export const checkOutDaysBuilder = (checkIn, month, bookedDays, Component) => {
+export const checkOutDaysBuilder = (checkIn, month, bookedDays, Component, close) => {
   const { day: cDay, month: cMonth } = checkIn;
   const { days, info: [nMonth,, year] } = month;
   let checkOutDay;
@@ -115,13 +115,13 @@ export const checkOutDaysBuilder = (checkIn, month, bookedDays, Component) => {
     const keyDay = day[1];
 
     if (keyDay === cDay && cMonth === nMonth) {
-      return <Component type="end" date={`${nMonth + 1}/${keyDay}/${year}`} className="check-in" key={keyDay} day={keyDay} startCol={day[0]} />;
+      return <Component close={close} type="end" date={`${nMonth + 1}/${keyDay}/${year}`} className="check-in" key={keyDay} day={keyDay} startCol={day[0]} />;
     }
 
     if (cDay < keyDay && checkOutDay >= keyDay && cMonth === nMonth) {
-      return <Component type="end" date={`${nMonth + 1}/${keyDay}/${year}`} className="options" key={keyDay} day={keyDay} startCol={day[0]} />;
+      return <Component close={close} type="end" date={`${nMonth + 1}/${keyDay}/${year}`} className="options" key={keyDay} day={keyDay} startCol={day[0]} />;
     }
 
-    return <Component type="end" date={`${nMonth + 1}/${keyDay}/${year}`} className="booked" key={keyDay} day={keyDay} startCol={day[0]} />;
+    return <Component close={close} type="end" date={`${nMonth + 1}/${keyDay}/${year}`} className="booked" key={keyDay} day={keyDay} startCol={day[0]} />;
   });
 };

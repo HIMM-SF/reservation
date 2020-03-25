@@ -42,6 +42,18 @@ const reducer = (state, action) => {
         ...state,
         checkIn: undefined,
         checkOut: undefined,
+        start: {
+          type: undefined,
+          day: undefined,
+          month: undefined,
+          year: undefined,
+        },
+        end: {
+          type: undefined,
+          day: undefined,
+          month: undefined,
+          year: undefined,
+        },
       };
 
     default:

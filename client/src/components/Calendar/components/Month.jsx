@@ -46,7 +46,7 @@ const GridWrapper = styled.div`
   `}
 `;
 
-const Month = ({ month, bookedDays }) => {
+const Month = ({ month, bookedDays, close }) => {
   const { info: [, cMonth, year] } = month;
   const { checkIn, start, end } = useContext(ReservationContext);
 
@@ -57,7 +57,7 @@ const Month = ({ month, bookedDays }) => {
         {
           !checkIn
             ? openDaysBuilder(month, bookedDays, Day)
-            : checkOutDaysBuilder(start, month, bookedDays, Day)
+            : checkOutDaysBuilder(start, month, bookedDays, Day, close)
         }
       </GridWrapper>
     </Root>

@@ -26,4 +26,4 @@ const Summary = () => {
     </Root>
   );
 };
-export default Summary;
+export default React.memo(Summary);

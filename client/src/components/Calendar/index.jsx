@@ -37,7 +37,9 @@ const InnerContainer = styled.div`
   }
 `;
 
-const Calendar = ({ checkIn, months, bookedDates }, ref) => {
+const Calendar = ({
+  checkIn, months, bookedDates, close,
+}, ref) => {
   const [currentIndex, setcurrentIndex] = useState((new Date()).getMonth());
 
   const handleSlider = (direction) => {
@@ -58,7 +60,7 @@ const Calendar = ({ checkIn, months, bookedDates }, ref) => {
           <Slider index={currentIndex}>
             { months.map((month) => {
               const [id, name] = month.info;
-              return <Month key={id} bookedDays={bookedDates[name]} month={month} />;
+              return <Month close={close} key={id} bookedDays={bookedDates[name]} month={month} />;
             })}
           </Slider>
 

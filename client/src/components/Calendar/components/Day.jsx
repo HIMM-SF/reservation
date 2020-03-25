@@ -33,18 +33,21 @@ const Root = styled.div.attrs((props) => ({
     color: white;
     pointer-events: none;
   }
-
-  &.options {
-    // background-color: ${(props) => props.theme.inputBackground};
-    // color: white;
-  }
 `;
 
-const Day = ({ day, ...props }) => {
+const Day = ({ day, close, ...props }) => {
   const dispatch = useContext(ReservationActionContext);
+  const handleAdd = (e) => {
+    const { type } = e.target.dataset;
+    addReservation(dispatch)(e);
+
+    if (type === "end") {
+      close();
+    }
+  };
 
   return (
-    <Root {...props} onClick={addReservation(dispatch)} onMouseEnter={onHover(dispatch)}>
+    <Root {...props} onClick={handleAdd} onMouseEnter={onHover(dispatch)}>
       {day}
     </Root>
   );

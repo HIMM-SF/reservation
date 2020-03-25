@@ -1,5 +1,5 @@
 import {
-  SET_ROOM, HOVER, ADD, ADD_GUEST, RESET,
+  SET_ROOM, HOVER, ADD, ADD_GUEST, RESET, RESET_CHECKOUT,
 } from "./types";
 
 export const onHover = (dispatch) => (e) => {
