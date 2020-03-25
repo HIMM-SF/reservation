@@ -1,8 +1,6 @@
-import React, { useContext } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import ArrowRight from "../../../../assets/ArrowRight.svg";
-import { ReservationActionContext } from "../../../context/reservation.context";
-import { prevMonth, nextMonth } from "../../../actions";
 
 const Root = styled.div`
   width: 100%;
@@ -11,9 +9,15 @@ const Root = styled.div`
   box-sizing: border-box;
   position: relative;
   z-index: 2;
+
+  .slider {
+    background-color: red;
+  }
 `;
 
-const Button = styled.button`
+const Button = styled.button.attrs((props) => ({
+  "data-type": props.left ? "left" : "right",
+}))`
   width: 39px;
   height: 33px;
   background-color: white;
@@ -26,6 +30,7 @@ const Button = styled.button`
     fill: #757575;
     width: 19px !important;
     height: 19px !important;
+    pointer-events: none;
     transform: ${(props) => (props.left ? "rotate(180deg)" : "")}
   }
 `;
@@ -37,16 +42,18 @@ const InnerContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const Controller = () => {
-  const dispatch = useContext(ReservationActionContext);
+const Controller = ({ handleSlider }) => {
+  const handleSliderDirection = useCallback((e) => {
+    handleSlider(e.target.dataset.type);
+  });
 
   return (
     <Root>
       <InnerContainer>
-        <Button left type="button" onClick={prevMonth(dispatch)}><ArrowRight /></Button>
-        <Button type="button" onClick={nextMonth(dispatch)}><ArrowRight /></Button>
+        <Button left type="button" onClickCapture={handleSliderDirection}><ArrowRight /></Button>
+        <Button type="button" onClick={handleSliderDirection}><ArrowRight /></Button>
       </InnerContainer>
     </Root>
   );
 };
-export default Controller;
+export default React.memo(Controller);

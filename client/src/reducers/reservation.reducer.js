@@ -1,49 +1,50 @@
-import { getNextMonth, getPreviousMonth } from "../util/date-helper";
 import {
-  ADD, NEXT, PREV, HOVER, RESET, SET_ROOM,
+  HOVER, SET_ROOM, ADD,
 } from "../actions/types";
 
 const reducer = (state, action) => {
-  const { month: { info: [month,, year] }, checkIn } = state;
+  const { checkIn, months, start } = state;
   const type = checkIn ? "checkOut" : "checkIn";
 
   switch (action.type) {
     case ADD:
       return {
         ...state,
-        [type]: `${month + 1}/${action.day}/${year}`,
-        start: action.day,
+        [type]: action.date,
+        start: action.start,
+      };
+
+    case HOVER:
+      if (!checkIn) return state;
+
+      return {
+        ...state,
+        end: action.end,
+        months: months.map((month) => {
+          const { days, info: [mInt] } = month;
+
+          if (mInt === action.end.month) {
+            days.map((day) => {
+              if (start.day < day[1] && action.end.day >= day[1] && !day[2]) {
+                day.push(true);
+              }
+
+              if (day[2] && day[1] > action.end.day) {
+                day.pop();
+              }
+
+              return day;
+            });
+          }
+
+          return month;
+        }),
       };
 
     case SET_ROOM:
       return {
         ...state,
         room: action.room,
-      };
-
-    case NEXT:
-      return {
-        ...state,
-        month: getNextMonth(year, month),
-      };
-
-    case PREV:
-      return {
-        ...state,
-        month: getPreviousMonth(year, month),
-      };
-
-    case HOVER:
-      return {
-        ...state,
-        end: action.day,
-      };
-
-    case RESET:
-      return {
-        ...state,
-        checkIn: undefined,
-        checkOut: undefined,
       };
 
     default:

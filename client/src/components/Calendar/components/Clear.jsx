@@ -31,4 +31,4 @@ const Clear = () => {
   );
 };
 
-export default Clear;
+export default React.memo(Clear);

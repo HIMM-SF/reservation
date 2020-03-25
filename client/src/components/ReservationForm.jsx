@@ -28,7 +28,7 @@ const ReservationForm = () => {
 
 
   const {
-    checkIn, checkOut, room, year,
+    room, months, checkOut, checkIn,
   } = useContext(ReservationContext);
   const dispatch = useContext(ReservationActionContext);
 
@@ -56,7 +56,7 @@ const ReservationForm = () => {
 
   useEffect(() => {
     fetchAllRooms();
-  }, [year]);
+  }, []);
 
   return (
     <Box column margin="16px 0 24px 0;">
@@ -79,7 +79,7 @@ const ReservationForm = () => {
             </Box>
           </Box>
 
-          { (openCheckIn && !checkOut) ? <Calendar ref={calendarRef} /> : ""}
+          { (openCheckIn && !checkOut) ? <Calendar months={months} bookedDates={room.booked_dates} checkIn={checkIn} ref={calendarRef} /> : ""}
         </FormControl>
 
         <FormControl label="Guests">

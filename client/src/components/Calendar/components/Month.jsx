@@ -38,32 +38,30 @@ const GridWrapper = styled.div`
   grid-template-rows: repeat(6, 1fr);
   grid-gap: 1px;
 
-  ${(props) => props.start && props.end && css`
-    .options:nth-child(n+${props.start}):nth-child(-n+${props.end}) {
-      background-color: ${props.theme.inputBackground};
-      color: white;
-    }
-  `}
+  // ${(props) => props.start && props.end && css`
+  //   .options:nth-child(n+${props.start}):nth-child(-n+${props.end}) {
+  //     background-color: ${props.theme.inputBackground};
+  //     color: white;
+  //   }
+  // `}
 `;
 
-const Month = ({ month }) => {
-  const {
-    checkIn, start, room: { booked_dates: bookedDates }, end,
-  } = useContext(ReservationContext);
+const Month = ({ month, bookedDays }) => {
   const { info: [, cMonth, year] } = month;
+  const { checkIn, start, end } = useContext(ReservationContext); // start end use for color using the above REMOVE LATER
 
   return (
     <Root>
       <h4>{`${cMonth} ${year}`}</h4>
-      <GridWrapper start={start} end={end}>
+      <GridWrapper start={start ? start.day : undefined} end={end ? end.day : undefined}>
         {
           !checkIn
-            ? openDaysBuilder(month, bookedDates, Day)
-            : checkOutDaysBuilder(checkIn, month, bookedDates, Day)
+            ? openDaysBuilder(month, bookedDays, Day)
+            : checkOutDaysBuilder(start, month, bookedDays, Day)
         }
       </GridWrapper>
     </Root>
   );
 };
 
-export default Month;
+export default React.memo(Month);

@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-
 const Root = styled.div`
   position: relative;
   top: -20px;
@@ -24,15 +23,14 @@ const ListItem = styled.li`
   color: ${(props) => props.theme.strongFont}
 `;
 
-const Header = () => {
-  const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-  return (
-    <Root>
-      <OrderedList>
-        {days.map((day) => <ListItem key={day}>{day}</ListItem>)}
-      </OrderedList>
-    </Root>
-  );
-};
+const days = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
-export default Header;
+const Header = () => (
+  <Root>
+    <OrderedList>
+      {days.map((day) => <ListItem key={day}>{day}</ListItem>)}
+    </OrderedList>
+  </Root>
+);
+
+export default React.memo(Header);

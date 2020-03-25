@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
+import CaretUp from "../../../../assets/CaretUp.svg";
 import { ReservationContext } from "../../../context/reservation.context";
 
 const Root = styled.div`
@@ -28,12 +29,9 @@ const Caret = () => {
 
   return (
     <Root checkIn={checkIn}>
-      <svg role="presentation" focusable="false">
-        <path d="M0,10 20,10 10,0z" />
-        <path d="M0,10 10,0 20,10" />
-      </svg>
+      <CaretUp />
     </Root>
   );
 };
 
-export default Caret;
+export default React.memo(Caret);

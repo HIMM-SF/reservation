@@ -1,30 +1,35 @@
 import React, { createContext, useReducer } from "react";
-import { getCurrentMonth, getCurrentYear } from "../util/date-helper";
+import { getCurrentYear } from "../util/date-helper";
 import reservationReducer from "../reducers/reservation.reducer";
+import dateReducer from "../reducers/date.reducer";
 
 const initialValue = {
-  room: undefined,
-  month: getCurrentMonth(),
-  year: getCurrentYear(),
   checkIn: undefined,
   checkOut: undefined,
-  guest: {
-    adults: 1,
-    children: 0,
-    infants: 0,
-  },
+  room: undefined,
+  months: getCurrentYear(),
+};
+
+const initialDate = {
+  checkIn: undefined,
+  checkOut: undefined,
 };
 
 export const ReservationContext = createContext();
+export const DateContext = createContext();
 export const ReservationActionContext = createContext();
 
-export function ReservationProvider2({ children }) {
+export function ReservationProvider({ children }) {
   const [reservation, dispatch] = useReducer(reservationReducer, initialValue);
+  const date = useReducer(dateReducer, initialDate);
+
   return (
     <ReservationContext.Provider value={reservation}>
-      <ReservationActionContext.Provider value={dispatch}>
-        {children}
-      </ReservationActionContext.Provider>
+      <DateContext.Provider value={date}>
+        <ReservationActionContext.Provider value={dispatch}>
+          {children}
+        </ReservationActionContext.Provider>
+      </DateContext.Provider>
     </ReservationContext.Provider>
   );
 }

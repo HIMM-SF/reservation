@@ -1,10 +1,9 @@
-import React, { useContext, memo } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Caret from "./components/Caret";
 import Controller from "./components/Controller";
 import Header from "./components/Header";
 import Month from "./components/Month";
-import { ReservationContext } from "../../context/reservation.context";
 import Clear from "./components/Clear";
 import Slider from "./components/Slider";
 
@@ -32,22 +31,35 @@ const InnerContainer = styled.div`
   height: 285px;
   padding: 0 7px;
   box-sizing: border-box;
+
+  .slider {
+    transform: translateX(-${(props) => (((props.index) * 315))}px);
+  }
 `;
 
-const Calendar = (props, ref) => {
-  const { checkIn, year } = useContext(ReservationContext);
+const Calendar = ({ checkIn, months, bookedDates }, ref) => {
+  const [currentIndex, setcurrentIndex] = useState((new Date()).getMonth());
 
-  console.log("Re-render Calendar");
+  const handleSlider = (direction) => {
+    let oldIndex = currentIndex;
+    const newIndex = direction === "left" ? oldIndex -= 1 : oldIndex += 1;
+
+    setcurrentIndex(newIndex);
+  };
+
   return (
     <Root ref={ref} border>
       <Caret />
       <InnerRoot>
         <InnerContainer>
-          <Controller />
+          <Controller handleSlider={handleSlider} />
           <Header />
 
-          <Slider>
-            { year.map((month) => <Month key={month.info[0]} month={month} />) }
+          <Slider index={currentIndex}>
+            { months.map((month) => {
+              const [id, name] = month.info;
+              return <Month key={id} bookedDays={bookedDates[name]} month={month} />;
+            })}
           </Slider>
 
         </InnerContainer>
@@ -58,4 +70,4 @@ const Calendar = (props, ref) => {
   );
 };
 
-export default memo(React.forwardRef(Calendar));
+export default React.forwardRef(Calendar);

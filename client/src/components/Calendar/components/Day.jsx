@@ -1,9 +1,11 @@
-import React, { memo, useContext } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { ReservationActionContext } from "../../../context/reservation.context";
 import { addReservation, onHover } from "../../../actions";
 
-const Root = styled.div`
+const Root = styled.div.attrs((props) => ({
+  "data-date": props.date,
+}))`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,14 +33,14 @@ const Root = styled.div`
     pointer-events: none;
   }
 
-  &.options:hover {
+  &.options {
     background-color: ${(props) => props.theme.inputBackground};
+    color: white;
   }
 `;
 
 const Day = ({ day, ...props }) => {
   const dispatch = useContext(ReservationActionContext);
-  console.log("Inside Day Component");
 
   return (
     <Root {...props} onClick={addReservation(dispatch)} onMouseEnter={onHover(dispatch)}>
@@ -47,4 +49,4 @@ const Day = ({ day, ...props }) => {
   );
 };
 
-export default memo(Day);
+export default React.memo(Day);

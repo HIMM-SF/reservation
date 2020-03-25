@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
-import { ReservationContext } from "../../../context/reservation.context";
 
 const Root = styled.div`
   position: absolute;
@@ -14,15 +13,11 @@ const RootWrapper = styled.div`
   transition: transform 200ms linear;
 `;
 
-const Slider = ({ children }) => {
-  const { month: { info: [index] } } = useContext(ReservationContext);
-
-  return (
-    <Root>
-      <RootWrapper index={index}>
-        { children }
-      </RootWrapper>
-    </Root>
-  );
-};
+const Slider = ({ children, index }) => (
+  <Root>
+    <RootWrapper className="slider" index={index}>
+      { children }
+    </RootWrapper>
+  </Root>
+);
 export default Slider;
