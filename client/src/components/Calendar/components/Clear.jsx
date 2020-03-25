@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { ReservationContext } from "../../../context/reservation.context";
+import { ReservationActionContext } from "../../../context/reservation.context";
+import { resetDates } from "../../../actions";
 
 const Root = styled.div`
   position: relative;
@@ -20,11 +21,11 @@ const Button = styled.button`
 `;
 
 const Clear = () => {
-  const { resetReservation } = useContext(ReservationContext);
+  const dispatch = useContext(ReservationActionContext);
 
   return (
     <Root>
-      <Button type="button" onClick={resetReservation}>
+      <Button type="button" onClick={resetDates(dispatch)}>
         Clear dates
       </Button>
     </Root>

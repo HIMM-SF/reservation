@@ -1,5 +1,5 @@
 import {
-  SET_ROOM, HOVER, ADD, ADD_GUEST,
+  SET_ROOM, HOVER, ADD, ADD_GUEST, RESET,
 } from "./types";
 
 export const onHover = (dispatch) => (e) => {
@@ -40,4 +40,8 @@ export const addGuest = (dispatch, type) => (e) => dispatch({
     key: type,
     operation: e.target.dataset.type,
   },
+});
+
+export const resetDates = (dispatch) => () => dispatch({
+  type: RESET,
 });

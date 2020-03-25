@@ -1,5 +1,5 @@
 import {
-  HOVER, SET_ROOM, ADD, ADD_GUEST,
+  HOVER, SET_ROOM, ADD, ADD_GUEST, RESET,
 } from "../actions/types";
 
 const reducer = (state, action) => {
@@ -54,6 +54,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         room: action.room,
+      };
+
+    case RESET:
+      return {
+        ...state,
+        checkIn: undefined,
+        checkOut: undefined,
       };
 
     default:
