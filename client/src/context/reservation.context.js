@@ -20,7 +20,6 @@ export const ReservationActionContext = createContext();
 export function ReservationProvider({ children }) {
   const [reservation, dispatch] = useReducer(reservationReducer, initialValue);
 
-
   return (
     <ReservationContext.Provider value={reservation}>
       <ReservationActionContext.Provider value={dispatch}>

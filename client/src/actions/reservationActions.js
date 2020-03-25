@@ -22,11 +22,13 @@ export const setRoom = (dispatch) => (room) => dispatch({
 
 export const addReservation = (dispatch) => (e) => {
   const [month, day, year] = e.target.dataset.date.split("/");
+  const { type } = e.target.dataset;
 
   return dispatch({
     type: ADD,
     date: e.target.dataset.date,
-    start: {
+    day: {
+      type,
       day: Number(day),
       month: Number(month) - 1,
       year: Number(year),

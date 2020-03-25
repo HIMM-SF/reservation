@@ -10,10 +10,11 @@ import Divider from "./Divider";
 import Input from "./Input";
 import ReservationHeader from "./ReservationHeader";
 import Calendar from "./Calendar";
-import { ReservationActionContext, ReservationContext } from "../context/reservation.context";
+import Summary from "./Summary";
 import GuestForm from "./Guest";
 import ArrowDown from "../../assets/ArrowDown.svg";
 import { setRoom } from "../actions";
+import { ReservationActionContext, ReservationContext } from "../context/reservation.context";
 
 // hooks helper
 import toggleState from "../hooks/useToggle";
@@ -98,6 +99,8 @@ const ReservationForm = () => {
           </Box>
           { openGuestForm ? <GuestForm ref={guestFormRef} closeForm={setOpenGuestForm} /> : ""}
         </FormControl>
+
+        {(checkIn && checkOut) ? <Summary /> : ""}
 
         <Button block>Reserve</Button>
         <Paragraph block center variant="h5">You won&apos;t be charged yet</Paragraph>

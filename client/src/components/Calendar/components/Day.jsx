@@ -5,6 +5,7 @@ import { addReservation, onHover } from "../../../actions";
 
 const Root = styled.div.attrs((props) => ({
   "data-date": props.date,
+  "data-type": props.type,
 }))`
   display: flex;
   justify-content: center;

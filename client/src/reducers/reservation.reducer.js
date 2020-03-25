@@ -11,7 +11,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         [type]: action.date,
-        start: action.start,
+        [action.day.type]: action.day,
       };
 
     case ADD_GUEST:
