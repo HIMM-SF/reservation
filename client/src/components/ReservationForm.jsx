@@ -102,7 +102,7 @@ const ReservationForm = () => {
 
         {(checkIn && checkOut) ? <Summary /> : ""}
 
-        <Button block>Reserve</Button>
+        <Button type="button" block>Reserve</Button>
         <Paragraph block center variant="h5">You won&apos;t be charged yet</Paragraph>
       </form>
 
