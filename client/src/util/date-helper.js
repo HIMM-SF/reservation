@@ -78,6 +78,7 @@ export const getCurrentMonth = () => {
 
 export const openDaysBuilder = (month, bookedDays, Component) => {
   const { days, info: [nMonth,, year] } = month;
+  const currentDate = new Date();
   let i = 0; // match index value to the each day and increment when booked day is equal to day
 
   return days.map((day) => {
@@ -85,6 +86,10 @@ export const openDaysBuilder = (month, bookedDays, Component) => {
     // Marked all day as booked for previous month + years
     if (!bookedDays.length || bookedDays[i] === keyDay) {
       i += 1;
+      return <Component type="start" date={`${nMonth + 1}/${keyDay}/${year}`} className="booked" key={keyDay} day={keyDay} startCol={day[0]} />;
+    }
+
+    if (currentDate.getDate() > keyDay && currentDate.getMonth() === nMonth) {
       return <Component type="start" date={`${nMonth + 1}/${keyDay}/${year}`} className="booked" key={keyDay} day={keyDay} startCol={day[0]} />;
     }
 
