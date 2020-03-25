@@ -42,11 +42,11 @@ const Box = styled(OldBox)`
   }
 `;
 
-const ReservationHeader = ({ price, reviews }) => (
+const ReservationHeader = ({ price, reviews, mobile }) => (
   <>
     <Box className="price" height="28px;" alignItems="baseline">
       <span> ${ price } </span>
-      <span> per night </span>
+      <span> {mobile ? "/ night" : "per night"}</span>
     </Box>
     <Box className="stats" lineHeight={1} alignItems="baseline">
       <span>
@@ -55,7 +55,7 @@ const ReservationHeader = ({ price, reviews }) => (
         </svg>
       </span>
       <span> 4.80 </span>
-      <span> ({ reviews } reviews) </span>
+      <span> ({ reviews }{mobile || "reviews"}) </span>
     </Box>
   </>
 );

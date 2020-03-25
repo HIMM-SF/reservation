@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Reservation from "./Reservation";
 import { ReservationProvider } from "../context/reservation.context";
+import ReservationController from "./ResponsiveController";
 
 const Header = styled.div`
   display: flex;
@@ -46,6 +47,19 @@ const MainBodyRight = styled.div`
   display: flex;
   justify-content: flex-end;
   flex: 1;
+
+  @media screen and (max-width: 1127px) { 
+    width: 100%;
+    position: fixed;
+    background-color: white;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 80px;
+    -webkit-box-shadow: 0px -10px 54px -14px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px -10px 54px -14px rgba(0,0,0,0.75);
+    box-shadow: 0px -10px 54px -20px rgba(0,0,0,0.75);
+  }
 `;
 
 const App = () => (
@@ -68,12 +82,12 @@ const App = () => (
           </MainBodyLeft>
 
           <MainBodyRight>
-
             <ReservationProvider>
               <Reservation />
+              <ReservationController />
             </ReservationProvider>
-
           </MainBodyRight>
+
         </MainBody>
       </MainBodyContainer>
     </Main>

@@ -8,6 +8,10 @@ const ReservationContainer = styled.div`
   margin-top: 32px;
   position: sticky;
   top: 75px;
+
+  @media screen and (max-width: 1127px) { 
+    display: none;
+  }
 `;
 
 const OuterWrapper = styled.div`

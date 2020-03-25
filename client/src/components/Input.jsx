@@ -10,6 +10,7 @@ const Input = styled.input`
   caret-color: transparent;
   color: ${(props) => props.theme.lightFont};
   height: fit-content;
+  margin-right: 5px;
 
   &.active {
     background-color:${(props) => props.theme.inputBackground};

@@ -38,26 +38,26 @@ const GridWrapper = styled.div`
   grid-template-rows: repeat(6, 1fr);
   grid-gap: 1px;
 
-  // ${(props) => props.start && props.end && css`
-  //   .options:nth-child(n+${props.start}):nth-child(-n+${props.end}) {
-  //     background-color: ${props.theme.inputBackground};
-  //     color: white;
-  //   }
-  // `}
+  ${(props) => props.start && props.end && css`
+    .options:nth-child(n+${props.start}):nth-child(-n+${props.end}) {
+      background-color: ${props.theme.inputBackground};
+      color: white;
+    }
+  `}
 `;
 
-const Month = ({ month, bookedDays }) => {
+const Month = ({ month, bookedDays, close }) => {
   const { info: [, cMonth, year] } = month;
-  const { checkIn, start, end } = useContext(ReservationContext); // start end use for color using the above REMOVE LATER
+  const { checkIn, start, end } = useContext(ReservationContext);
 
   return (
     <Root>
       <h4>{`${cMonth} ${year}`}</h4>
-      <GridWrapper start={start ? start.day : undefined} end={end ? end.day : undefined}>
+      <GridWrapper start={start.day} end={end.day}>
         {
           !checkIn
             ? openDaysBuilder(month, bookedDays, Day)
-            : checkOutDaysBuilder(start, month, bookedDays, Day)
+            : checkOutDaysBuilder(start, month, bookedDays, Day, close)
         }
       </GridWrapper>
     </Root>
