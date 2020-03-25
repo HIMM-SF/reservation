@@ -3,7 +3,7 @@ import {
 } from "../actions/types";
 
 const reducer = (state, action) => {
-  const { checkIn, months, start } = state;
+  const { checkIn } = state;
   const type = checkIn ? "checkOut" : "checkIn";
 
   switch (action.type) {
@@ -29,25 +29,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         end: action.end,
-        months: months.map((month) => {
-          const { days, info: [mInt] } = month;
-
-          if (mInt === action.end.month) {
-            days.map((day) => {
-              if (start.day < day[1] && action.end.day >= day[1] && !day[2]) {
-                day.push(true);
-              }
-
-              if (day[2] && day[1] > action.end.day) {
-                day.pop();
-              }
-
-              return day;
-            });
-          }
-
-          return month;
-        }),
       };
 
     case SET_ROOM:

@@ -35,8 +35,8 @@ const Root = styled.div.attrs((props) => ({
   }
 
   &.options {
-    background-color: ${(props) => props.theme.inputBackground};
-    color: white;
+    // background-color: ${(props) => props.theme.inputBackground};
+    // color: white;
   }
 `;
 

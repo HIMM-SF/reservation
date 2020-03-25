@@ -12,6 +12,18 @@ const initialValue = {
     children: 0,
     infants: 0,
   },
+  start: {
+    type: undefined,
+    day: undefined,
+    month: undefined,
+    year: undefined,
+  },
+  end: {
+    type: undefined,
+    day: undefined,
+    month: undefined,
+    year: undefined,
+  },
 };
 
 export const ReservationContext = createContext();
