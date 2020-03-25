@@ -27,17 +27,24 @@ const Close = styled.div`
   button {
     border: none;
     background-color: white;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     color: ${(props) => props.theme.checkIn};
     cursor: pointer;
     outline: none;
     padding-right: 0;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 
-const Guest = (props, ref) => {
+const Guest = ({ closeForm }, ref) => {
   const { guest: { adults, children, infants } } = useContext(ReservationContext);
+
+  const saveForm = () => {
+    closeForm(false);
+  };
 
   return (
     <Root ref={ref}>
@@ -45,7 +52,7 @@ const Guest = (props, ref) => {
       <Entry title="Children" text="Ages 2-12" value={children} />
       <Entry title="Infants" text="Under 2" value={infants} />
       <Entry fullWidth text="6 guests maximum. Infants don't count toward the number of guests." />
-      <Close><button type="button">Close</button></Close>
+      <Close><button type="button" onClick={saveForm}>Close</button></Close>
     </Root>
   );
 };

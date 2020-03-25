@@ -8,6 +8,11 @@ const initialValue = {
   checkOut: undefined,
   room: undefined,
   months: getCurrentYear(),
+  guest: {
+    adults: 1,
+    children: 0,
+    infants: 0,
+  },
 };
 
 const initialDate = {

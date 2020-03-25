@@ -1,4 +1,6 @@
-import { SET_ROOM, HOVER, ADD } from "./types";
+import {
+  SET_ROOM, HOVER, ADD, ADD_GUEST,
+} from "./types";
 
 export const onHover = (dispatch) => (e) => {
   const [month, day, year] = e.target.dataset.date.split("/");
@@ -31,3 +33,11 @@ export const addReservation = (dispatch) => (e) => {
     },
   });
 };
+
+export const addGuest = (dispatch, type) => (e) => dispatch({
+  type: ADD_GUEST,
+  guest: {
+    key: type,
+    operation: e.target.dataset.type,
+  },
+});

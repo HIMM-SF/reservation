@@ -1,6 +1,6 @@
 // Reservation
 export {
-  setRoom, onHover, addReservation,
+  setRoom, onHover, addReservation, addGuest,
 } from "./reservationActions";
 
 // Date

@@ -1,5 +1,5 @@
 import {
-  HOVER, SET_ROOM, ADD,
+  HOVER, SET_ROOM, ADD, ADD_GUEST,
 } from "../actions/types";
 
 const reducer = (state, action) => {
@@ -12,6 +12,15 @@ const reducer = (state, action) => {
         ...state,
         [type]: action.date,
         start: action.start,
+      };
+
+    case ADD_GUEST:
+      return {
+        ...state,
+        guest: {
+          ...state.guest,
+          [action.guest.key]: action.guest.operation === "add" ? state.guest[action.guest.key] + 1 : state.guest[action.guest.key] - 1,
+        },
       };
 
     case HOVER:

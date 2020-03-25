@@ -1,4 +1,6 @@
-import { ADD, RESET, HOVER } from "../actions/types";
+import {
+  ADD, RESET, HOVER,
+} from "../actions/types";
 
 const reducer = (state, action) => {
   const { checkIn } = state;

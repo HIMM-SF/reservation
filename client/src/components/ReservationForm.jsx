@@ -26,9 +26,8 @@ const ReservationForm = () => {
   const [openCheckIn, setOpenCheckIn] = toggleState(calendarRef, checkinInputRef, false);
   const [openGuestForm, setOpenGuestForm] = toggleState(guestFormRef, guestFormInputRef, false);
 
-
   const {
-    room, months, checkOut, checkIn,
+    room, months, checkOut, checkIn, guest: { adults, children, infants },
   } = useContext(ReservationContext);
   const dispatch = useContext(ReservationActionContext);
 
@@ -85,14 +84,19 @@ const ReservationForm = () => {
         <FormControl label="Guests">
           <Box ref={guestFormInputRef} alignItems="center" border pointer onClick={handleGuestForm}>
             <Box alignItems="center" height="40px" padding="0 0 0 8px">
-              <Input pointer type="text" placeholder="1 guest" width={80} />
+              <Input
+                pointer
+                type="text"
+                placeholder={`${adults} guests${children ? `,${children} children` : ""}${infants ? `,${infants} infants` : ""}`}
+                width={220}
+              />
             </Box>
 
             <Box svg paddingRight={16}>
               <ArrowDown width={16} height={16} style={{ transform: openGuestForm ? "rotate(180deg)" : "" }} />
             </Box>
           </Box>
-          { openGuestForm ? <GuestForm ref={guestFormRef} /> : ""}
+          { openGuestForm ? <GuestForm ref={guestFormRef} closeForm={setOpenGuestForm} /> : ""}
         </FormControl>
 
         <Button block>Reserve</Button>
@@ -103,4 +107,4 @@ const ReservationForm = () => {
   );
 };
 
-export default ReservationForm;
+export default React.memo(ReservationForm);

@@ -24,4 +24,4 @@ const Reservation = () => (
   </ReservationContainer>
 );
 
-export default Reservation;
+export default React.memo(Reservation);

@@ -34,8 +34,8 @@ const Entry = ({
     </Text>
 
     {fullWidth ? "" : (
-      <Controller type={title}>{ value }</Controller>
+      <Controller type={title.toLowerCase()}>{ value }</Controller>
     ) }
   </Root>
 );
-export default Entry;
+export default React.memo(Entry);
