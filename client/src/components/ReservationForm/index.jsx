@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ReservationForm from "./ReservationForm";
+import Form from "./components/Form";
 
 const ReservationContainer = styled.div`
   width: 376px;
@@ -23,7 +23,7 @@ const OuterWrapper = styled.div`
 const Reservation = () => (
   <ReservationContainer>
     <OuterWrapper>
-      <ReservationForm />
+      <Form />
     </OuterWrapper>
   </ReservationContainer>
 );

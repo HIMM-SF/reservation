@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Reservation from "./Reservation";
+import Reservation from "./ReservationForm";
 import { ReservationProvider } from "../context/reservation.context";
 import ReservationController from "./ResponsiveController";
 

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import ReservationHeader from "../ReservationHeader";
+import ReservationHeader from "../ReservationForm/components/Header";
 import { ReservationContext } from "../../context/reservation.context";
 
 const Root = styled.div`
