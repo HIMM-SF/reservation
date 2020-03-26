@@ -12,7 +12,7 @@ const Root = styled.div`
   height: 340px;
   background-color: white;
   position: absolute;
-  top: 170px;
+  top: 169px;
   border: solid 1px ${(props) => props.theme.borderColorV2};
 `;
 

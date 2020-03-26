@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import OldBox from "./Box";
+import OldBox from "../../theme/Box";
 
 const Box = styled(OldBox)`
   &.price {
@@ -42,7 +42,7 @@ const Box = styled(OldBox)`
   }
 `;
 
-const ReservationHeader = ({ price, reviews, mobile }) => (
+const Header = ({ price, reviews, mobile }) => (
   <>
     <Box className="price" height="28px;" alignItems="baseline">
       <span> ${ price } </span>
@@ -60,4 +60,4 @@ const ReservationHeader = ({ price, reviews, mobile }) => (
   </>
 );
 
-export default React.memo(ReservationHeader);
+export default React.memo(Header);

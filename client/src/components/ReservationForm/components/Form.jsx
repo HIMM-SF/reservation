@@ -2,22 +2,22 @@ import React, {
   useEffect, useRef, useContext,
 } from "react";
 import axios from "axios";
-import Button from "./Button";
-import Paragraph from "./Paragraph";
-import Box from "./Box";
-import FormControl from "./FormControl";
-import Divider from "./Divider";
-import Input from "./Input";
-import ReservationHeader from "./ReservationHeader";
-import Calendar from "./Calendar";
-import Summary from "./Summary";
-import GuestForm from "./Guest";
-import ArrowDown from "../../assets/ArrowDown.svg";
-import { setRoom } from "../actions";
-import { ReservationActionContext, ReservationContext } from "../context/reservation.context";
+import Button from "../../theme/Button";
+import Paragraph from "../../theme/Paragraph";
+import Box from "../../theme/Box";
+import FormControl from "../../theme/FormControl";
+import Divider from "../../theme/Divider";
+import Input from "../../theme/Input";
+import Header from "./Header";
+import Calendar from "../../Calendar";
+import Summary from "../../Summary";
+import GuestForm from "../../Guest";
+import ArrowDown from "../../../../assets/ArrowDown.svg";
+import { setRoom } from "../../../actions";
+import { ReservationActionContext, ReservationContext } from "../../../context/reservation.context";
 
 // hooks helper
-import toggleState from "../hooks/useToggle";
+import toggleState from "../../../hooks/useToggle";
 
 
 const ReservationForm = () => {
@@ -65,7 +65,7 @@ const ReservationForm = () => {
 
   return (
     <Box column margin="16px 0 24px 0;">
-      <ReservationHeader price={room ? Math.floor(room.per_night) : ""} reviews={room ? room.reviews.length * 25 : ""} />
+      <Header price={room ? Math.floor(room.per_night) : ""} reviews={room ? room.reviews.length * 25 : ""} />
       <Divider />
 
       <form>
